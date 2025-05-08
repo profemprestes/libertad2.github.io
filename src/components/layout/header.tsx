@@ -11,12 +11,12 @@ import { Menu } from 'lucide-react';
 import React from 'react';
 
 const navItems = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/history', label: 'History', icon: BookOpen },
-  { href: '/roster', label: 'Roster', icon: Users },
-  { href: '/matches', label: 'Matches', icon: CalendarDays },
-  { href: '/news', label: 'News', icon: Newspaper },
-  { href: '/contact', label: 'Contact', icon: Mail },
+  { href: '/', label: 'Inicio', icon: Home },
+  { href: '/history', label: 'Historia', icon: BookOpen },
+  { href: '/roster', label: 'Plantilla', icon: Users },
+  { href: '/matches', label: 'Partidos', icon: CalendarDays },
+  { href: '/news', label: 'Noticias', icon: Newspaper },
+  { href: '/contact', label: 'Contacto', icon: Mail },
 ];
 
 export function Header() {
@@ -66,7 +66,7 @@ export function Header() {
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle Menu</span>
+                <span className="sr-only">Alternar Menú</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs p-6">

@@ -11,7 +11,7 @@ interface MatchScheduleProps {
 
 export function MatchSchedule({ matches }: MatchScheduleProps) {
   if (!matches || matches.length === 0) {
-    return <p className="text-center text-muted-foreground">No matches to display.</p>;
+    return <p className="text-center text-muted-foreground">No hay partidos para mostrar.</p>;
   }
 
   const upcomingMatches = matches
@@ -39,17 +39,17 @@ export function MatchSchedule({ matches }: MatchScheduleProps) {
     <Tabs defaultValue="upcoming" className="w-full">
       <TabsList className="grid w-full grid-cols-2 mb-6">
         <TabsTrigger value="upcoming" className="text-base">
-          <CalendarClock className="mr-2 h-5 w-5" /> Upcoming / Live
+          <CalendarClock className="mr-2 h-5 w-5" /> Próximos / En Vivo
         </TabsTrigger>
         <TabsTrigger value="past" className="text-base">
-          <CheckCircle className="mr-2 h-5 w-5" /> Results
+          <CheckCircle className="mr-2 h-5 w-5" /> Resultados
         </TabsTrigger>
       </TabsList>
       <TabsContent value="upcoming">
-        {renderMatchList(upcomingMatches, 'No upcoming matches scheduled.')}
+        {renderMatchList(upcomingMatches, 'No hay próximos partidos programados.')}
       </TabsContent>
       <TabsContent value="past">
-        {renderMatchList(pastMatches, 'No past match results available.')}
+        {renderMatchList(pastMatches, 'No hay resultados de partidos anteriores disponibles.')}
       </TabsContent>
     </Tabs>
   );

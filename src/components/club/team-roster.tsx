@@ -7,7 +7,7 @@ interface TeamRosterProps {
 
 export function TeamRoster({ players }: TeamRosterProps) {
   if (!players || players.length === 0) {
-    return <p className="text-center text-muted-foreground">No players to display in the roster.</p>;
+    return <p className="text-center text-muted-foreground">No hay jugadores para mostrar en la plantilla.</p>;
   }
 
   const coaches = players.filter(p => p.position === 'Coach');
@@ -34,11 +34,11 @@ export function TeamRoster({ players }: TeamRosterProps) {
 
   return (
     <div className="space-y-8">
-      {renderPlayerSection('Coaching Staff', coaches)}
-      {renderPlayerSection('Goalkeepers', goalkeepers)}
-      {renderPlayerSection('Defenders', defenders)}
-      {renderPlayerSection('Midfielders', midfielders)}
-      {renderPlayerSection('Forwards', forwards)}
+      {renderPlayerSection('Cuerpo Técnico', coaches)}
+      {renderPlayerSection('Porteros', goalkeepers)}
+      {renderPlayerSection('Defensas', defenders)}
+      {renderPlayerSection('Centrocampistas', midfielders)}
+      {renderPlayerSection('Delanteros', forwards)}
     </div>
   );
 }

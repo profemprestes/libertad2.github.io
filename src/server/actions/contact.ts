@@ -3,10 +3,10 @@
 import { z } from "zod";
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
+  email: z.string().email({ message: "Por favor, introduce una dirección de correo electrónico válida." }),
+  subject: z.string().min(5, { message: "El asunto debe tener al menos 5 caracteres." }),
+  message: z.string().min(10, { message: "El mensaje debe tener al menos 10 caracteres." }),
 });
 
 export type ContactFormState = {
@@ -33,24 +33,24 @@ export async function submitContactForm(
 
   if (!validatedFields.success) {
     return {
-      message: "Validation failed. Please check your input.",
+      message: "Falló la validación. Por favor, revisa tus datos.",
       status: "error",
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
   // In a real application, you would send an email or save to a database here.
-  console.log("Contact form submitted:");
-  console.log("Name:", validatedFields.data.name);
+  console.log("Formulario de contacto enviado:");
+  console.log("Nombre:", validatedFields.data.name);
   console.log("Email:", validatedFields.data.email);
-  console.log("Subject:", validatedFields.data.subject);
-  console.log("Message:", validatedFields.data.message);
+  console.log("Asunto:", validatedFields.data.subject);
+  console.log("Mensaje:", validatedFields.data.message);
 
   // Simulate a delay
   await new Promise(resolve => setTimeout(resolve, 1000));
 
   return {
-    message: "Thank you for your message! We will get back to you soon.",
+    message: "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.",
     status: "success",
   };
 }

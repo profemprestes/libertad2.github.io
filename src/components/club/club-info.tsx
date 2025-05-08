@@ -21,19 +21,19 @@ export function ClubInfo({ address, phone, email, socialMedia }: ClubInfoProps) 
     <Card className="shadow-lg">
       <CardHeader>
         <CardTitle className="text-2xl text-primary flex items-center">
-          <MapPin className="mr-3 h-6 w-6" /> Club Headquarters
+          <MapPin className="mr-3 h-6 w-6" /> Sede del Club
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
           <h3 className="font-semibold text-foreground flex items-center mb-1">
-            <MapPin className="mr-2 h-5 w-5 text-muted-foreground" /> Address
+            <MapPin className="mr-2 h-5 w-5 text-muted-foreground" /> Dirección
           </h3>
           <p className="text-muted-foreground ml-7">{address}</p>
         </div>
         <div>
           <h3 className="font-semibold text-foreground flex items-center mb-1">
-            <Phone className="mr-2 h-5 w-5 text-muted-foreground" /> Phone
+            <Phone className="mr-2 h-5 w-5 text-muted-foreground" /> Teléfono
           </h3>
           <Link href={`tel:${phone.replace(/\s/g, '')}`} className="text-muted-foreground hover:text-primary transition-colors ml-7">
             {phone}
@@ -41,7 +41,7 @@ export function ClubInfo({ address, phone, email, socialMedia }: ClubInfoProps) 
         </div>
         <div>
           <h3 className="font-semibold text-foreground flex items-center mb-1">
-            <Mail className="mr-2 h-5 w-5 text-muted-foreground" /> Email
+            <Mail className="mr-2 h-5 w-5 text-muted-foreground" /> Correo Electrónico
           </h3>
           <Link href={`mailto:${email}`} className="text-muted-foreground hover:text-primary transition-colors ml-7">
             {email}
@@ -51,7 +51,7 @@ export function ClubInfo({ address, phone, email, socialMedia }: ClubInfoProps) 
         {socialMedia.length > 0 && (
           <div>
             <h3 className="font-semibold text-foreground flex items-center mb-2">
-              <Share2 className="mr-2 h-5 w-5 text-muted-foreground" /> Connect With Us
+              <Share2 className="mr-2 h-5 w-5 text-muted-foreground" /> Conéctate con Nosotros
             </h3>
             <div className="flex space-x-4 ml-7">
               {socialMedia.map((social) => {

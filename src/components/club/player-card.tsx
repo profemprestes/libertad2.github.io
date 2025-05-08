@@ -46,18 +46,18 @@ export function PlayerCard({ player }: PlayerCardProps) {
         <div className="mt-3 space-y-1 text-xs text-muted-foreground">
           {player.nationality && (
             <div className="flex items-center">
-              <Flag className="mr-1.5 h-3.5 w-3.5 text-primary" /> Nationality: {player.nationality}
+              <Flag className="mr-1.5 h-3.5 w-3.5 text-primary" /> Nacionalidad: {player.nationality}
             </div>
           )}
           {player.joinedYear && (
             <div className="flex items-center">
-              <CalendarDays className="mr-1.5 h-3.5 w-3.5 text-primary" /> Joined: {player.joinedYear}
+              <CalendarDays className="mr-1.5 h-3.5 w-3.5 text-primary" /> Se unió en: {player.joinedYear}
             </div>
           )}
         </div>
       </CardContent>
        {/* <CardFooter>
-        <Button variant="link" className="p-0 text-primary">View Profile</Button> 
+        <Button variant="link" className="p-0 text-primary">Ver Perfil</Button> 
       </CardFooter> */}
     </Card>
   );

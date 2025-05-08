@@ -7,7 +7,7 @@ interface NewsFeedProps {
 
 export function NewsFeed({ articles }: NewsFeedProps) {
   if (!articles || articles.length === 0) {
-    return <p className="text-center text-muted-foreground">No news articles to display.</p>;
+    return <p className="text-center text-muted-foreground">No hay artículos de noticias para mostrar.</p>;
   }
 
   // Sort articles by date, newest first

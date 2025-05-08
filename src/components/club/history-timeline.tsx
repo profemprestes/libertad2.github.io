@@ -9,7 +9,7 @@ interface HistoryTimelineProps {
 
 export function HistoryTimeline({ events }: HistoryTimelineProps) {
   if (!events || events.length === 0) {
-    return <p className="text-center text-muted-foreground">No historical events to display.</p>;
+    return <p className="text-center text-muted-foreground">No hay eventos históricos para mostrar.</p>;
   }
 
   return (

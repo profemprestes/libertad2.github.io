@@ -7,9 +7,9 @@ export default function HistoryPage() {
   return (
     <div>
       <SectionTitle 
-        title="Our Glorious History" 
+        title="Nuestra Gloriosa Historia" 
         icon={BookOpen}
-        description="Journey through the defining moments of Club Atlético Libertad, from its humble beginnings to its greatest triumphs."
+        description="Viaja a través de los momentos decisivos del Club Atlético Libertad, desde sus humildes comienzos hasta sus mayores triunfos."
       />
       <HistoryTimeline events={mockHistoricalEvents} />
     </div>

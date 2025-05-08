@@ -15,10 +15,10 @@ import { useToast } from '@/hooks/use-toast';
 import { Send, Loader2 } from 'lucide-react';
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters long." }),
+  name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
+  email: z.string().email({ message: "Por favor, introduce una dirección de correo electrónico válida." }),
+  subject: z.string().min(5, { message: "El asunto debe tener al menos 5 caracteres." }),
+  message: z.string().min(10, { message: "El mensaje debe tener al menos 10 caracteres." }),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -34,11 +34,11 @@ function SubmitButton() {
     <Button type="submit" disabled={pending} className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
       {pending ? (
         <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Enviando...
         </>
       ) : (
         <>
-          Send Message <Send className="ml-2 h-4 w-4" />
+          Enviar Mensaje <Send className="ml-2 h-4 w-4" />
         </>
       )}
     </Button>
@@ -61,7 +61,7 @@ export function ContactForm() {
   useEffect(() => {
     if (state.status === 'success') {
       toast({
-        title: 'Message Sent!',
+        title: '¡Mensaje Enviado!',
         description: state.message,
       });
       reset(); // Reset form fields
@@ -82,34 +82,34 @@ export function ContactForm() {
   return (
     <Card className="w-full shadow-lg">
       <CardHeader>
-        <CardTitle className="text-2xl text-primary">Get In Touch</CardTitle>
+        <CardTitle className="text-2xl text-primary">Ponte en Contacto</CardTitle>
         <CardDescription>
-          Have questions or want to learn more? Fill out the form below.
+          ¿Tienes preguntas o quieres saber más? Completa el formulario a continuación.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form action={formAction} className="space-y-6">
           <div>
-            <Label htmlFor="name">Full Name</Label>
-            <Input id="name" {...register('name')} placeholder="John Doe" aria-invalid={!!getFieldError('name')} />
+            <Label htmlFor="name">Nombre Completo</Label>
+            <Input id="name" {...register('name')} placeholder="Juan Pérez" aria-invalid={!!getFieldError('name')} />
             {getFieldError('name') && <p className="text-sm text-destructive mt-1">{getFieldError('name')}</p>}
           </div>
 
           <div>
-            <Label htmlFor="email">Email Address</Label>
-            <Input id="email" type="email" {...register('email')} placeholder="john.doe@example.com" aria-invalid={!!getFieldError('email')} />
+            <Label htmlFor="email">Dirección de Correo Electrónico</Label>
+            <Input id="email" type="email" {...register('email')} placeholder="juan.perez@ejemplo.com" aria-invalid={!!getFieldError('email')} />
             {getFieldError('email') && <p className="text-sm text-destructive mt-1">{getFieldError('email')}</p>}
           </div>
 
           <div>
-            <Label htmlFor="subject">Subject</Label>
-            <Input id="subject" {...register('subject')} placeholder="Inquiry about tickets" aria-invalid={!!getFieldError('subject')} />
+            <Label htmlFor="subject">Asunto</Label>
+            <Input id="subject" {...register('subject')} placeholder="Consulta sobre entradas" aria-invalid={!!getFieldError('subject')} />
             {getFieldError('subject') && <p className="text-sm text-destructive mt-1">{getFieldError('subject')}</p>}
           </div>
 
           <div>
-            <Label htmlFor="message">Message</Label>
-            <Textarea id="message" {...register('message')} placeholder="Your message here..." rows={5} aria-invalid={!!getFieldError('message')} />
+            <Label htmlFor="message">Mensaje</Label>
+            <Textarea id="message" {...register('message')} placeholder="Tu mensaje aquí..." rows={5} aria-invalid={!!getFieldError('message')} />
             {getFieldError('message') && <p className="text-sm text-destructive mt-1">{getFieldError('message')}</p>}
           </div>
           

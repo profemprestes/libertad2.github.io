@@ -23,7 +23,7 @@ export function MatchCard({ match }: MatchCardProps) {
       ) : teamLogoUrl ? (
         <Image 
           src={teamLogoUrl} 
-          alt={`${teamName} logo`} 
+          alt={`Logo de ${teamName}`} 
           width={64} 
           height={64} 
           className="rounded-full mb-2 h-12 w-12 sm:h-16 sm:w-16 object-contain"
@@ -43,9 +43,9 @@ export function MatchCard({ match }: MatchCardProps) {
       <CardHeader className={cn("pb-3", isPast ? "bg-muted/50" : "bg-secondary")}>
         <CardTitle className="text-base sm:text-lg text-center text-primary truncate">{match.competition}</CardTitle>
         <CardDescription className="text-center text-xs sm:text-sm">
-          {matchDate.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
+          {matchDate.toLocaleDateString('es-ES', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
           {' - '}
-          {matchDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}
+          {matchDate.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-4 pb-4">
@@ -57,10 +57,10 @@ export function MatchCard({ match }: MatchCardProps) {
               <p className="text-2xl sm:text-4xl font-bold text-foreground">
                 {match.homeScore} - {match.awayScore}
               </p>
-              <p className="text-xs text-muted-foreground">Full Time</p>
+              <p className="text-xs text-muted-foreground">Finalizado</p>
             </div>
           ) : (
-            <p className="text-2xl sm:text-4xl font-bold text-muted-foreground">VS</p>
+            <p className="text-2xl sm:text-4xl font-bold text-muted-foreground">vs.</p>
           )}
 
           <TeamDisplay teamName={match.awayTeam} teamLogoUrl={isLibertadHome ? match.opponentLogoUrl : undefined} isLibertad={!isLibertadHome} />
@@ -74,7 +74,7 @@ export function MatchCard({ match }: MatchCardProps) {
         <CardFooter className="bg-muted/50 p-3 justify-center">
           <Button variant="ghost" size="sm" asChild className="text-primary hover:text-primary/80 hover:bg-primary/10">
             <Link href={match.highlightsUrl} target="_blank" rel="noopener noreferrer">
-              <Tv className="h-4 w-4 mr-1.5" /> Watch Highlights
+              <Tv className="h-4 w-4 mr-1.5" /> Ver Resumen
             </Link>
           </Button>
         </CardFooter>
@@ -83,7 +83,7 @@ export function MatchCard({ match }: MatchCardProps) {
          <CardFooter className="bg-destructive/80 p-3 justify-center">
           <Button variant="destructive" size="sm" asChild className="text-destructive-foreground hover:bg-destructive">
             <Link href="#"> {/* Link to live match updates */}
-              <BarChart className="h-4 w-4 mr-1.5 animate-pulse" /> Live Updates
+              <BarChart className="h-4 w-4 mr-1.5 animate-pulse" /> Actualizaciones en Vivo
             </Link>
           </Button>
         </CardFooter>

@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Club Atlético Libertad',
-  description: 'Official website of Club Atlético Libertad',
+  description: 'Sitio web oficial del Club Atlético Libertad',
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body 
         className={cn(
           geistSans.variable, 

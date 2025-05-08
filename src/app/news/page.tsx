@@ -7,9 +7,9 @@ export default function NewsPage() {
   return (
     <div>
       <SectionTitle 
-        title="Latest Club News" 
+        title="Últimas Noticias del Club" 
         icon={Newspaper}
-        description="Stay informed with the latest updates, announcements, and stories from Club Atlético Libertad."
+        description="Mantente informado con las últimas actualizaciones, anuncios e historias del Club Atlético Libertad."
       />
       <NewsFeed articles={mockNewsArticles} />
     </div>

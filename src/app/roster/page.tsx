@@ -7,9 +7,9 @@ export default function RosterPage() {
   return (
     <div>
       <SectionTitle 
-        title="Meet Our Squad" 
+        title="Conoce Nuestro Equipo" 
         icon={Users}
-        description="Get to know the talented players and dedicated coaching staff of Club Atlético Libertad."
+        description="Conoce a los talentosos jugadores y al dedicado cuerpo técnico del Club Atlético Libertad."
       />
       <TeamRoster players={mockPlayers} />
     </div>

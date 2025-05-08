@@ -7,9 +7,9 @@ export default function MatchesPage() {
   return (
     <div>
       <SectionTitle 
-        title="Fixtures & Results" 
+        title="Partidos y Resultados" 
         icon={CalendarDays}
-        description="Stay updated with Club Atlético Libertad's upcoming matches and review past results."
+        description="Mantente actualizado con los próximos partidos del Club Atlético Libertad y revisa los resultados pasados."
       />
       <MatchSchedule matches={mockMatches} />
     </div>

@@ -10,6 +10,16 @@ interface NewsCardProps {
   article: NewsArticle;
 }
 
+const getCategoryInSpanish = (category: NewsArticle['category']): string => {
+  switch (category) {
+    case 'Club News': return 'Noticias del Club';
+    case 'Match Report': return 'Crónica del Partido';
+    case 'Transfer': return 'Fichaje';
+    case 'Community': return 'Comunidad';
+    default: return category;
+  }
+};
+
 export function NewsCard({ article }: NewsCardProps) {
   const articleDate = new Date(article.date);
 
@@ -30,10 +40,10 @@ export function NewsCard({ article }: NewsCardProps) {
       <CardHeader>
         <div className="flex justify-between items-center mb-1">
           <CardDescription className="text-xs">
-            {articleDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+            {articleDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
           </CardDescription>
           <Badge variant="secondary" className="text-xs">
-            <Tag className="mr-1 h-3 w-3" /> {article.category}
+            <Tag className="mr-1 h-3 w-3" /> {getCategoryInSpanish(article.category)}
           </Badge>
         </div>
         <CardTitle className="text-xl lg:text-2xl hover:text-primary transition-colors">
@@ -52,11 +62,11 @@ export function NewsCard({ article }: NewsCardProps) {
         {article.content ? (
           <Button variant="default" asChild className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto">
             <Link href={`/news/${article.id}`}>
-              Read Full Story <ArrowRight className="ml-2 h-4 w-4" />
+              Leer Historia Completa <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         ) : (
-           <span className="text-sm text-muted-foreground italic">Summary only</span>
+           <span className="text-sm text-muted-foreground italic">Solo resumen</span>
         )}
       </CardFooter>
     </Card>
