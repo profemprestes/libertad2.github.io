@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s | Club Atlético Libertad',
   },
   description: 'Sitio web oficial del Club Atlético Libertad. Noticias, partidos, plantilla, historia y tienda oficial del Decano del Fútbol Canario.',
-  keywords: ['Club Atlético Libertad', 'Libertad Canelones', 'fútbol uruguayo', 'Decano Canario', 'noticias libertad', 'partidos libertad', 'historia club libertad', 'tienda club libertad'],
+  keywords: ['Club Atlético Libertad', 'Libertad Canelones', 'fútbol uruguayo', 'Decano Canario', 'noticias libertad', 'partidos libertad', 'historia club libertad', 'tienda club libertad', 'generador de prompts'],
   authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
   creator: 'Club Atlético Libertad',
   publisher: 'Club Atlético Libertad',
@@ -83,6 +83,9 @@ export const metadata: Metadata = {
   manifest: `${SITE_URL}/favicon/site.webmanifest`,
   alternates: {
     canonical: '/',
+    types: {
+      'application/rss+xml': [{ url: '/rss.xml', title: 'Noticias del Club Atlético Libertad' }],
+    }
   }
 };
 

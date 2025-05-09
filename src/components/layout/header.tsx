@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, CalendarDays, Home, Mail, Newspaper, ShieldCheck, Users, ShoppingBag, ShoppingCart } from 'lucide-react';
+import { BookOpen, CalendarDays, Home, Mail, Newspaper, ShieldCheck, Users, ShoppingBag, ShoppingCart, FileText } from 'lucide-react';
 import { ClubLogo } from '@/components/club/club-logo';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -20,6 +20,7 @@ const navItems = [
   { href: '/news', label: 'Noticias', icon: Newspaper },
   { href: '/contact', label: 'Contacto', icon: Mail },
   { href: '/tienda', label: 'Tienda', icon: ShoppingBag },
+  { href: '/prompt-generator', label: 'Prompt Gen', icon: FileText }, // Added for internal use
 ];
 
 export function Header() {
@@ -37,7 +38,7 @@ export function Header() {
     if (isClient) {
       setTotalCartItems(getTotalItems());
     }
-  }, [getTotalItems, isClient, pathname]); // Re-check on pathname change if cart updates don't trigger it
+  }, [getTotalItems, isClient, pathname, useCart().cartItems]); // Re-check on pathname change or cartItems change
 
 
   const NavLink = ({ href, label, icon: Icon, isCartLink = false }: { href: string; label: string; icon: React.ElementType; isCartLink?: boolean }) => {

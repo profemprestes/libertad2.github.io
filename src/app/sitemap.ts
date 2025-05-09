@@ -14,11 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/tienda',
     '/cart',
+    '/haztesocio',
+    '/prompt-generator', // Added new page
   ].map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date().toISOString(),
     changeFrequency: route === '/' ? 'daily' : 'weekly' as MetadataRoute.Sitemap[0]['changeFrequency'],
-    priority: route === '/' ? 1 : 0.8,
+    priority: route === '/' ? 1 : (route === '/prompt-generator' ? 0.5 : 0.8), // Adjusted priority
   }));
 
   const newsArticleRoutes: MetadataRoute.Sitemap = noticias.map((article) => ({
