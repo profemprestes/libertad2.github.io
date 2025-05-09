@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s | Club Atlético Libertad',
   },
   description: 'Sitio web oficial del Club Atlético Libertad. Noticias, partidos, plantilla, historia y tienda oficial del Decano del Fútbol Canario.',
-  keywords: ['Club Atlético Libertad', 'Libertad Canelones', 'fútbol uruguayo', 'Decano Canario', 'noticias libertad', 'partidos libertad', 'historia libertad', 'tienda libertad'],
+  keywords: ['Club Atlético Libertad', 'Libertad Canelones', 'fútbol uruguayo', 'Decano Canario', 'noticias libertad', 'partidos libertad', 'historia club libertad', 'tienda club libertad'],
   authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
   creator: 'Club Atlético Libertad',
   publisher: 'Club Atlético Libertad',
@@ -92,17 +92,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning className="h-full"> {/* Ensure html and body take full height */}
+    <html lang="es" suppressHydrationWarning className="h-full">
       <body 
         className={cn(
           geistSans.variable, 
           geistMono.variable, 
-          "antialiased flex flex-col min-h-screen bg-background text-foreground" // min-h-screen ensures body takes at least full viewport height
+          "antialiased flex flex-col min-h-screen bg-background text-foreground"
         )}
       >
         <CartProvider>
           <Header />
-          <main className="flex-grow container mx-auto px-4 py-8"> {/* flex-grow allows main to take available space */}
+          <main className="flex-grow container mx-auto px-4 py-8">
             {children}
           </main>
           <Footer />
