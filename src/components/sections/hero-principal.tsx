@@ -30,7 +30,7 @@ export function HeroPrincipal() {
           Pasión, Historia, Victoria. Únete a la familia Libertad.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-          <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transition-transform hover:scale-105">
+          <Button asChild size="lg" className="bg-background text-primary hover:bg-secondary shadow-lg transition-transform hover:scale-105">
             <Link href="/matches">
               Ver Partidos <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
