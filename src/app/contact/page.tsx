@@ -1,9 +1,11 @@
+'use client';
+
 import { ContactForm } from '@/components/club/contact-form';
 import { ClubInfo } from '@/components/club/club-info';
 import { motion } from 'framer-motion';
 import { SectionTitle } from '@/components/shared/section-title';
 import { clubContactInfo } from '@/lib/mock-data';
-import { Mail } from 'lucide-react';
+import { Mail, MapPinIcon } from 'lucide-react'; // Changed Mail to MapPinIcon as it's more appropriate for Ubicacion
 import { HeroContacto } from '@/components/sections/HeroContacto';
 import type { Metadata } from 'next';
 
@@ -61,7 +63,7 @@ export default function ContactPage() {
       <SectionTitle
         id="ubicacion"
         title="Nuestra Ubicación"
-        icon={Mail} // You might want to change this icon
+        icon={MapPinIcon} 
         description="Encuentra nuestra sede en el mapa interactivo. ¡Te esperamos!"
         className="pt-12"
       />
