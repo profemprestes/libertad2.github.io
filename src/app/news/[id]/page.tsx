@@ -106,8 +106,8 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
                 <Image
                   src={noticia.imageUrl}
                   alt={noticia.title} 
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  className="object-cover"
                   data-ai-hint="news main image"
                   priority 
                 />

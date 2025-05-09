@@ -43,8 +43,8 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
                   <Image
                     src={noticia.imageUrl}
                     alt={noticia.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    className="object-cover"
                     data-ai-hint="news event"
                   />
                 </div>
