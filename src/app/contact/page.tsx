@@ -1,11 +1,9 @@
-'use client';
 
 import { ContactForm } from '@/components/club/contact-form';
 import { ClubInfo } from '@/components/club/club-info';
-import { motion } from 'framer-motion';
 import { SectionTitle } from '@/components/shared/section-title';
 import { clubContactInfo } from '@/lib/mock-data';
-import { Mail, MapPinIcon } from 'lucide-react'; // Changed Mail to MapPinIcon as it's more appropriate for Ubicacion
+import { Mail, MapPinIcon } from 'lucide-react';
 import { HeroContacto } from '@/components/sections/HeroContacto';
 import type { Metadata } from 'next';
 
@@ -40,19 +38,19 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return ( 
+  return (
     <div>
       <HeroContacto />
-      <SectionTitle 
-        id="formulario" 
-        title="Información de Contacto y Formulario" 
+      <SectionTitle
+        id="formulario"
+        title="Información de Contacto y Formulario"
         icon={Mail}
         description="Utiliza el formulario para enviarnos un mensaje o encuéntranos a través de los siguientes canales."
-        className="pt-12" 
+        className="pt-12"
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <ContactForm />
-        <ClubInfo 
+        <ClubInfo
           address={clubContactInfo.address}
           phone={clubContactInfo.phone}
           email={clubContactInfo.email}
@@ -63,15 +61,12 @@ export default function ContactPage() {
       <SectionTitle
         id="ubicacion"
         title="Nuestra Ubicación"
-        icon={MapPinIcon} 
+        icon={MapPinIcon}
         description="Encuentra nuestra sede en el mapa interactivo. ¡Te esperamos!"
         className="pt-12"
       />
-      <motion.div
+      <div
         className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] rounded-lg overflow-hidden shadow-xl"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
       >
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1390.8978353219497!2d-56.28321602873977!3d-34.53498688224576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a1b5cad07d69bd%3A0x1e517ff03e4cc652!2sClub%20Atl%C3%A9tico%20Libertad!5e1!3m2!1ses!2suy!4v1746822926812!5m2!1ses!2suy"
@@ -83,7 +78,7 @@ export default function ContactPage() {
           referrerPolicy="no-referrer-when-downgrade"
           aria-label="Ubicación del Club Atlético Libertad en Google Maps"
         ></iframe>
-      </motion.div>
+      </div>
     </div>
   );
 }
