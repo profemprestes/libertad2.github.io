@@ -1,5 +1,8 @@
 import { UltimasNoticias } from '@/components/sections/ultimasnoticias';
 import type { Metadata } from 'next';
+import { HeroNoticias } from '@/components/sections/HeroNoticias';
+import { SectionTitle } from '@/components/shared/section-title';
+import { Newspaper } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Noticias | Club Libertad',
@@ -9,14 +12,14 @@ export const metadata: Metadata = {
 export default function NoticiasPage() {
   return (
     <div className="container mx-auto px-4 py-12">
-      <header className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-5xl">
-          Archivo de Noticias
-        </h1>
-        <p className="mt-4 text-xl text-muted-foreground">
-          Explora todas las noticias y novedades de Club Atlético Libertad.
-        </p>
-      </header>
+      <HeroNoticias />
+      <SectionTitle
+        id="ultimas"
+        title="Archivo de Noticias"
+        description="Explora todas las noticias y novedades de Club Atlético Libertad."
+        icon={Newspaper}
+        className="pt-12"
+      />
       <UltimasNoticias showViewAllLink={false} /> {/* Show all news, no "view all" link needed here */}
     </div>
   );
