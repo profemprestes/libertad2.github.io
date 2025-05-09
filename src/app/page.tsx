@@ -2,7 +2,8 @@ import { LatestNewsSection } from '@/components/sections/latest-news-section';
 import { UpcomingMatchSection } from '@/components/sections/upcoming-match-section';
 import { HeroPrincipal } from '@/components/sections/hero-principal';
 import { HistoriaResumen } from '@/components/sections/historia-resumen';
-import { HazteSocio } from '@/components/sections/Haztesocio'; // Corrected import name
+import { HazteSocio } from '@/components/sections/Haztesocio';
+import { EntrarATienda } from '@/components/sections/entraratienda'; // Added import
 import { partidos as allMatches } from '@/lib/partidos-data';
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
         </div>
       )}
       <LatestNewsSection />
+      <EntrarATienda /> {/* Integrated component */}
       <HazteSocio />
     </div>
   );
