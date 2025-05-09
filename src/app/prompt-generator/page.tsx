@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
@@ -9,6 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { SectionTitle } from '@/components/shared/section-title';
 import { FileText, Copy, AlertCircle, LogIn, LogOut, ShieldCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface PromptFormData {
   elementType: string;
@@ -26,6 +28,13 @@ const LOGIN_USER = 'LibertadAdmin';
 const LOGIN_PASS = 'DecanoCanario';
 const SESSION_KEY = 'promptGenSession';
 
+const elementTypes = [
+  { value: "componente", label: "Componente" },
+  { value: "sección", label: "Sección" },
+  { value: "data", label: "Archivo de Datos (data.ts)" },
+  { value: "page", label: "Página (page.tsx)" },
+];
+
 export default function PromptGeneratorPage() {
   const [isClient, setIsClient] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,7 +42,6 @@ export default function PromptGeneratorPage() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
-  // Existing states for prompt generator
   const [formData, setFormData] = useState<PromptFormData>({
     elementType: '',
     elementName: '',
@@ -45,7 +53,6 @@ export default function PromptGeneratorPage() {
 
   useEffect(() => {
     setIsClient(true);
-    // Check for existing session on component mount
     if (localStorage.getItem(SESSION_KEY) === 'loggedIn') {
       setIsAuthenticated(true);
     }
@@ -57,7 +64,7 @@ export default function PromptGeneratorPage() {
       localStorage.setItem(SESSION_KEY, 'loggedIn');
       setIsAuthenticated(true);
       setLoginError('');
-      setUsername(''); // Clear input fields after successful login
+      setUsername('');
       setPassword('');
     } else {
       setLoginError('Usuario o contraseña incorrectos.');
@@ -67,9 +74,6 @@ export default function PromptGeneratorPage() {
   const handleLogout = () => {
     localStorage.removeItem(SESSION_KEY);
     setIsAuthenticated(false);
-    // Optionally, you can clear form data as well if needed
-    // setFormData({ elementType: '', elementName: '', elementDescription: '' });
-    // setGeneratedPrompt('');
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -77,6 +81,13 @@ export default function PromptGeneratorPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (formErrors[name as keyof PromptFormErrors]) {
       setFormErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleElementTypeChange = (value: string) => {
+    setFormData(prev => ({ ...prev, elementType: value }));
+    if (formErrors.elementType) {
+      setFormErrors(prev => ({ ...prev, elementType: undefined }));
     }
   };
 
@@ -213,15 +224,22 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
             <form onSubmit={handleGeneratePrompt} className="space-y-6">
               <div>
                 <Label htmlFor="elementType" className="text-foreground">Tipo de Elemento</Label>
-                <Input
-                  id="elementType"
-                  name="elementType"
+                <Select
                   value={formData.elementType}
-                  onChange={handleChange}
-                  placeholder="Ej: componente, sección, archivo de datos"
-                  className="mt-1"
-                  aria-invalid={!!formErrors.elementType}
-                />
+                  onValueChange={handleElementTypeChange}
+                  name="elementType"
+                >
+                  <SelectTrigger className="mt-1 w-full" aria-invalid={!!formErrors.elementType}>
+                    <SelectValue placeholder="Selecciona un tipo de elemento" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {elementTypes.map(type => (
+                      <SelectItem key={type.value} value={type.value}>
+                        {type.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 {formErrors.elementType && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{formErrors.elementType}</p>}
               </div>
 
@@ -286,3 +304,4 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
     </div>
   );
 }
+
