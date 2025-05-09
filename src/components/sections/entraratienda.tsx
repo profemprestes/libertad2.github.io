@@ -14,12 +14,12 @@ export function EntrarATienda() {
         {/* Imagen del producto */}
         <div className="relative">
           <Image
-            src="/tienda/camiseta1.jpg" // Using an existing image from public/tienda
-            alt="Camiseta Oficial Club Atlético Libertad"
+            src="/tienda/camiseta1.jpg" 
+            alt="Camiseta Oficial Titular 2024 del Club Atlético Libertad"
             width={500}
             height={500}
             className="w-full max-w-md mx-auto rounded-lg drop-shadow-lg object-contain"
-            data-ai-hint="club jersey"
+            data-ai-hint="club jersey red white"
           />
         </div>
 

@@ -6,21 +6,23 @@ import { Mail } from 'lucide-react';
 import { HeroContacto } from '@/components/sections/HeroContacto';
 import type { Metadata } from 'next';
 
-// IMPORTANT: Update this with your actual production URL
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
 export const metadata: Metadata = {
-  title: 'Contacto',
-  description: 'Ponte en contacto con el Club Atlético Libertad. Encuentra nuestra dirección, teléfono, email, redes sociales y envíanos un mensaje.',
-  keywords: ['contacto club libertad', 'club libertad teléfono', 'club libertad email', 'dirección club libertad', 'consultas club libertad'],
-  authors: [{ name: 'Club Atlético Libertad' }],
+  title: 'Contacto - Club Atlético Libertad',
+  description: 'Ponte en contacto con el Club Atlético Libertad. Encuentra nuestra dirección, teléfono, email, redes sociales y envíanos un mensaje directo.',
+  keywords: ['contacto club libertad', 'club libertad teléfono', 'club libertad email', 'dirección club libertad', 'consultas club libertad', 'formulario contacto libertad'],
+  authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
+  alternates: {
+    canonical: '/contact',
+  },
   openGraph: {
     title: 'Contacto - Club Atlético Libertad',
     description: 'Ponte en contacto con el Club Atlético Libertad. Encuentra nuestros datos y envíanos un mensaje.',
     url: `${SITE_URL}/contact`,
     images: [
       {
-        url: '/LogoLibertad.png',
+        url: `${SITE_URL}/LogoLibertad.png`,
         width: 512,
         height: 512,
         alt: 'Logo Club Atlético Libertad',
@@ -57,4 +59,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

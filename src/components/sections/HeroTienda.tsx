@@ -12,12 +12,12 @@ export function HeroTienda() {
         aria-hidden="true"
       >
         <Image 
-          src="https://picsum.photos/seed/storeHero/1200/800" // Placeholder, original /tienda/productos-libertad.jpg
-          alt="Productos del Club Atlético Libertad"
+          src="https://picsum.photos/seed/storeHero/1200/800" 
+          alt="Variedad de productos oficiales del Club Atlético Libertad"
           layout="fill"
           objectFit="cover"
           className="bg-center"
-          data-ai-hint="club merchandise"
+          data-ai-hint="club merchandise display"
         />
       </div>
 

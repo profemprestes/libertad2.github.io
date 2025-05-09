@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://clubatleticolibertad.example.com/sitemap.xml
-# IMPORTANT: Replace https://clubatleticolibertad.example.com with your actual production domain
+Sitemap: https://pruebaslibertad.netlify.app/sitemap.xml

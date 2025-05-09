@@ -2,16 +2,24 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { ClubLogo } from '@/components/club/club-logo';
+import Image from 'next/image'; // Import Image component
 
 export function HeroHistoria() {
   return (
     <section className="relative py-20 md:py-32 rounded-lg overflow-hidden shadow-xl bg-gradient-to-br from-primary via-red-700 to-accent mb-12">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: "url('/tienda/formatiivas1.jpg')" }}
-        data-ai-hint="historical soccer"
-        aria-hidden="true"
-      ></div>
+        className="absolute inset-0 opacity-20"
+        aria-hidden="true" 
+      >
+        <Image
+          src="/tienda/formatiivas1.jpg" 
+          alt="Imagen histórica de las formativas del Club Atlético Libertad" // Descriptive alt tag
+          layout="fill"
+          objectFit="cover"
+          className="bg-center"
+          data-ai-hint="historical soccer youth"
+        />
+      </div>
 
       <div className="relative container mx-auto px-4 text-center">
         <ClubLogo className="h-24 w-24 md:h-32 md:w-32 text-primary-foreground mx-auto mb-6 drop-shadow-lg" />

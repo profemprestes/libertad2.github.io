@@ -1,10 +1,8 @@
 import { MetadataRoute } from 'next';
-import { noticias } from '@/lib/noticias-data'; // Ensure this path is correct
-import { partidos } from '@/lib/partidos-data'; // For potential future use if match details pages are added
-import { tiendaProducts } from '@/lib/productos-tienda-data'; // For potential future use if product details pages are added
+import { noticias } from '@/lib/noticias-data';
+import { tiendaProducts } from '@/lib/productos-tienda-data'; 
 
-// IMPORTANT: Update this with your actual production URL
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -17,23 +15,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tienda',
     '/cart',
   ].map((route) => ({
-    url: `${BASE_URL}${route}`,
+    url: `${SITE_URL}${route}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: route === '/' ? 'daily' : 'weekly', // Homepage might change more often
+    changeFrequency: route === '/' ? 'daily' : 'weekly' as MetadataRoute.Sitemap[0]['changeFrequency'],
     priority: route === '/' ? 1 : 0.8,
   }));
 
   const newsArticleRoutes: MetadataRoute.Sitemap = noticias.map((article) => ({
-    url: `${BASE_URL}/news/${article.id}`,
+    url: `${SITE_URL}/news/${article.id}`,
     lastModified: new Date(article.date).toISOString(),
     changeFrequency: 'weekly',
     priority: 0.7,
   }));
-
-  // Example for future expansion: product pages
+  
+  // If product detail pages were to exist:
   // const productRoutes: MetadataRoute.Sitemap = tiendaProducts.map((product) => ({
-  //   url: `${BASE_URL}/tienda/${product.id}`, // Assuming product detail pages
-  //   lastModified: new Date().toISOString(), // Or product update date
+  //   url: `${SITE_URL}/tienda/${product.id}`, 
+  //   lastModified: new Date().toISOString(), 
   //   changeFrequency: 'monthly',
   //   priority: 0.6,
   // }));
@@ -41,6 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes, 
     ...newsArticleRoutes,
-    // ...productRoutes, // Add if product detail pages are created
-];
+    // ...productRoutes,
+  ];
 }

@@ -13,12 +13,12 @@ export function HeroPrincipal() {
       >
         <Image 
           src="/tienda/hinchada.jpg"
-          alt="Hinchada del Club Atlético Libertad"
+          alt="Hinchada del Club Atlético Libertad alentando en el estadio"
           layout="fill"
           objectFit="cover"
           className="bg-center"
           data-ai-hint="stadium crowd"
-          priority // LCP Image Optimization
+          priority 
         />
       </div>
       <div className="relative container mx-auto px-4 text-center">
@@ -45,4 +45,3 @@ export function HeroPrincipal() {
     </section>
   );
 }
-

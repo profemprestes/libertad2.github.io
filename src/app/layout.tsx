@@ -17,28 +17,32 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-// IMPORTANT: Update this with your actual production URL
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Club Atlético Libertad',
+    default: 'Club Atlético Libertad - Sitio Oficial',
     template: '%s | Club Atlético Libertad',
   },
   description: 'Sitio web oficial del Club Atlético Libertad. Noticias, partidos, plantilla, historia y tienda oficial del Decano del Fútbol Canario.',
-  keywords: ['Club Atlético Libertad', 'Libertad Canelones', 'fútbol uruguayo', 'Decano Canario', 'noticias libertad', 'partidos libertad'],
-  authors: [{ name: 'Club Atlético Libertad' }],
+  keywords: ['Club Atlético Libertad', 'Libertad Canelones', 'fútbol uruguayo', 'Decano Canario', 'noticias libertad', 'partidos libertad', 'historia libertad', 'tienda libertad'],
+  authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
+  creator: 'Club Atlético Libertad',
+  publisher: 'Club Atlético Libertad',
   openGraph: {
     type: 'website',
     locale: 'es_UY',
     url: SITE_URL,
     siteName: 'Club Atlético Libertad',
-    title: 'Club Atlético Libertad',
+    title: {
+        default: 'Club Atlético Libertad - Sitio Oficial',
+        template: '%s | Club Atlético Libertad',
+    },
     description: 'Sitio web oficial del Club Atlético Libertad. Noticias, partidos, plantilla, historia y tienda oficial.',
     images: [
       {
-        url: '/LogoLibertad.png', // Path relative to public directory
+        url: `${SITE_URL}/LogoLibertad.png`, 
         width: 512,
         height: 512,
         alt: 'Logo Club Atlético Libertad',
@@ -47,9 +51,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Club Atlético Libertad',
+    title: {
+        default: 'Club Atlético Libertad - Sitio Oficial',
+        template: '%s | Club Atlético Libertad',
+    },
     description: 'Sitio web oficial del Club Atlético Libertad. Noticias, partidos, plantilla, historia y tienda oficial.',
-    images: [`${SITE_URL}/LogoLibertad.png`], // Must be absolute URL for Twitter
+    images: [`${SITE_URL}/LogoLibertad.png`], 
+    // site: '@nombredeusuario', // Opcional: si el club tiene un usuario de Twitter
+    // creator: '@nombredeusuario_creador', // Opcional
   },
   robots: {
     index: true,
@@ -63,11 +72,18 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico', // Assuming favicon.ico is in public
-    shortcut: '/favicon-96x96.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/favicon/favicon.ico', 
+    shortcut: '/favicon/favicon-96x96.png',
+    apple: '/favicon/apple-touch-icon.png',
+    other: [
+        { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/favicon/favicon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', url: '/favicon/favicon-16x16.png' },
+    ]
   },
-  manifest: '/site.webmanifest',
+  manifest: `${SITE_URL}/favicon/site.webmanifest`,
+  alternates: {
+    canonical: '/',
+  }
 };
 
 export default function RootLayout({
@@ -81,7 +97,7 @@ export default function RootLayout({
         className={cn(
           geistSans.variable, 
           geistMono.variable, 
-          "antialiased flex flex-col min-h-screen"
+          "antialiased flex flex-col min-h-screen bg-background text-foreground"
         )}
       >
         <CartProvider>
@@ -96,4 +112,3 @@ export default function RootLayout({
     </html>
   );
 }
-

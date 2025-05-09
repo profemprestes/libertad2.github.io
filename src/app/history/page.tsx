@@ -5,27 +5,29 @@ import { mockHistoricalEvents } from '@/lib/mock-data';
 import { BookOpen } from 'lucide-react';
 import { HeroHistoria } from '@/components/sections/hero-historia';
 
-// IMPORTANT: Update this with your actual production URL
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
 export const metadata: Metadata = {
-  title: 'Nuestra Historia',
+  title: 'Nuestra Historia - Club Atlético Libertad',
   description: 'Explora la rica historia del Club Atlético Libertad desde su fundación en 1906. Descubre los momentos clave, logros y el legado del Decano del Fútbol Canario.',
-  keywords: ['historia club libertad', 'fundación club libertad', 'logros club libertad', 'cronología club libertad', 'decano canario'],
-  authors: [{ name: 'Club Atlético Libertad' }],
+  keywords: ['historia club libertad', 'fundación club libertad', 'logros club libertad', 'cronología club libertad', 'decano canario', 'fútbol Canelones historia'],
+  authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
+  alternates: {
+    canonical: '/history',
+  },
   openGraph: {
     title: 'Nuestra Historia - Club Atlético Libertad',
     description: 'Explora la rica historia del Club Atlético Libertad desde su fundación en 1906.',
     url: `${SITE_URL}/history`,
     images: [
       {
-        url: '/tienda/formatiivas1.jpg', // Use a relevant image if available, fallback to logo
+        url: `${SITE_URL}/tienda/formatiivas1.jpg`, 
         width: 1200,
         height: 630,
         alt: 'Imagen histórica del Club Atlético Libertad',
       },
        {
-        url: '/LogoLibertad.png',
+        url: `${SITE_URL}/LogoLibertad.png`,
         width: 512,
         height: 512,
         alt: 'Logo Club Atlético Libertad',
@@ -55,4 +57,3 @@ export default function HistoryPage() {
     </div>
   );
 }
-

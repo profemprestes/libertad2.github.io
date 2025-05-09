@@ -6,27 +6,29 @@ import { ComoComprar } from '@/components/sections/comocomprar';
 import { ProductList } from '@/components/tienda/ProductList';
 import { tiendaProducts } from '@/lib/productos-tienda-data';
 
-// IMPORTANT: Update this with your actual production URL
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
 export const metadata: Metadata = {
-  title: 'Tienda Oficial',
+  title: 'Tienda Oficial - Club Atlético Libertad',
   description: 'Descubrí productos oficiales del Club Atlético Libertad. Camisetas, bufandas, merchandising y más para verdaderos hinchas del Decano.',
-  keywords: ['tienda club libertad', 'merchandising libertad', 'comprar camiseta libertad', 'productos club libertad', 'regalos fútbol'],
-  authors: [{ name: 'Club Atlético Libertad' }],
+  keywords: ['tienda club libertad', 'merchandising libertad', 'comprar camiseta libertad', 'productos club libertad', 'regalos fútbol', 'ropa club libertad'],
+  authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
+  alternates: {
+    canonical: '/tienda',
+  },
   openGraph: {
     title: 'Tienda Oficial - Club Atlético Libertad',
     description: 'Descubrí productos oficiales del Club Atlético Libertad y llevá los colores del Decano.',
     url: `${SITE_URL}/tienda`,
     images: [
       {
-        url: '/tienda/camiseta1.jpg', // Example product image
+        url: `${SITE_URL}/tienda/camiseta1.jpg`, 
         width: 800,
         height: 600,
-        alt: 'Productos Oficiales Club Atlético Libertad',
+        alt: 'Camiseta Oficial Club Atlético Libertad',
       },
       {
-        url: '/LogoLibertad.png',
+        url: `${SITE_URL}/LogoLibertad.png`,
         width: 512,
         height: 512,
         alt: 'Logo Club Atlético Libertad',
@@ -55,7 +57,7 @@ export default function TiendaPage() {
       <ComoComprar />
       <section id="contacto-compra" className="py-12 md:py-16 bg-secondary">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-2xl font-semibold text-primary mb-4">¿Preguntas sobre tu compra?</h3>
+          <h2 className="text-2xl font-semibold text-primary mb-4">¿Preguntas sobre tu compra?</h2> {/* Changed to h2 from h3 */}
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             Si tenés dudas sobre un producto, el proceso de compra o querés coordinar un envío, no dudes en contactarnos.
           </p>
@@ -70,4 +72,3 @@ export default function TiendaPage() {
     </div>
   );
 }
-

@@ -4,25 +4,34 @@ import { HeroNoticias } from '@/components/sections/HeroNoticias';
 import { SectionTitle } from '@/components/shared/section-title';
 import { Newspaper } from 'lucide-react';
 
-// IMPORTANT: Update this with your actual production URL
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
 export const metadata: Metadata = {
-  title: 'Noticias',
+  title: 'Noticias - Club Atlético Libertad',
   description: 'Todas las últimas noticias y actualizaciones sobre Club Atlético Libertad. Mantente informado sobre el Decano del Fútbol Canario.',
-  keywords: ['noticias club libertad', 'club libertad novedades', 'actualidad club libertad', 'fútbol canelones noticias'],
-  authors: [{ name: 'Club Atlético Libertad' }],
+  keywords: ['noticias club libertad', 'club libertad novedades', 'actualidad club libertad', 'fútbol canelones noticias', 'últimas noticias libertad'],
+  authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
+  alternates: {
+    canonical: '/news',
+  },
   openGraph: {
     title: 'Noticias - Club Atlético Libertad',
     description: 'Todas las últimas noticias y actualizaciones sobre Club Atlético Libertad.',
     url: `${SITE_URL}/news`,
     images: [
       {
-        url: '/LogoLibertad.png', 
+        url: `${SITE_URL}/LogoLibertad.png`, 
         width: 512,
         height: 512,
         alt: 'Logo Club Atlético Libertad',
       },
+      // Podrías añadir una imagen genérica de noticias o prensa
+      // {
+      //   url: `${SITE_URL}/public/noticias_banner.jpg`,
+      //   width: 1200,
+      //   height: 630,
+      //   alt: 'Sección de Noticias del Club Atlético Libertad',
+      // },
     ],
   },
   twitter: {
@@ -47,4 +56,3 @@ export default function NoticiasPage() {
     </div>
   );
 }
-
