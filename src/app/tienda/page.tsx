@@ -1,8 +1,10 @@
+
 import { SectionTitle } from '@/components/shared/section-title';
 import { ShoppingBag } from 'lucide-react';
 import type { Metadata } from 'next';
 import { HeroTienda } from '@/components/sections/HeroTienda'; 
-import { ComoComprar } from '@/components/sections/comocomprar'; // Added import
+import { ComoComprar } from '@/components/sections/comocomprar';
+import { Productostienda } from '@/components/sections/productostienda'; // Added import
 
 export const metadata: Metadata = {
   title: 'Tienda Oficial | Club Libertad',
@@ -20,16 +22,8 @@ export default function TiendaPage() {
         description="Descubrí productos exclusivos del Club Atlético Libertad y lucí los colores con orgullo."
         className="pt-12"
       />
-      {/* Placeholder for product listing */}
-      <div className="text-center py-16">
-        <p className="text-xl text-muted-foreground">
-          Próximamente: Catálogo de productos oficiales del Club Atlético Libertad.
-        </p>
-        <p className="text-muted-foreground mt-2">
-          ¡Vuelve pronto para encontrar camisetas, bufandas, y mucho más!
-        </p>
-      </div>
-      <ComoComprar /> {/* Integrated ComoComprar component */}
+      <Productostienda /> {/* Integrated Productostienda component */}
+      <ComoComprar />
     </div>
   );
 }
