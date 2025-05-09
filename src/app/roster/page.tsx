@@ -3,6 +3,7 @@ import { TeamRoster } from '@/components/club/team-roster';
 import { SectionTitle } from '@/components/shared/section-title';
 import { mockPlayers } from '@/lib/mock-data';
 import { Users } from 'lucide-react';
+import { HeroEquipo } from '@/components/sections/HeroEquipo';
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
@@ -25,29 +26,31 @@ export const metadata: Metadata = {
         height: 512,
         alt: 'Logo Club Atlético Libertad',
       },
-      // Podrías agregar una imagen del equipo si está disponible
-      // {
-      //   url: `${SITE_URL}/public/equipo_plantel.jpg`,
-      //   width: 1200,
-      //   height: 630,
-      //   alt: 'Plantel del Club Atlético Libertad',
-      // },
+      {
+        url: `${SITE_URL}/tienda/plantel1.jpg`, // Updated OG image
+        width: 1200,
+        height: 630,
+        alt: 'Plantel del Club Atlético Libertad',
+      },
     ],
   },
   twitter: {
     title: 'Plantilla del Equipo - Club Atlético Libertad',
     description: 'Conoce a los jugadores y el cuerpo técnico del Club Atlético Libertad.',
-    images: [`${SITE_URL}/LogoLibertad.png`],
+    images: [`${SITE_URL}/tienda/plantel1.jpg`], // Updated Twitter image
   },
 };
 
 export default function RosterPage() {
   return (
     <div>
+      <HeroEquipo />
       <SectionTitle 
-        title="Conoce Nuestro Equipo" 
+        id="plantel-completo" // Added ID for anchor link from HeroEquipo
+        title="Plantel Completo" 
         icon={Users}
-        description="Descubre a los talentosos jugadores y al dedicado cuerpo técnico que representan al Club Atlético Libertad en cada partido."
+        description="Detalle de jugadores y cuerpo técnico del Decano del Fútbol Canario."
+        className="pt-12" // Add padding top to separate from HeroEquipo
       />
       <TeamRoster players={mockPlayers} />
     </div>
