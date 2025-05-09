@@ -36,11 +36,11 @@ export interface NewsArticle {
   id: string;
   title: string;
   date: string; // ISO string for date
-  summary: string; // Changed from extract to summary to match mock-data and news-card
-  imageUrl?: string; // Placeholder URL for image
-  content: string; // Full content of the news
+  summary: string; 
+  imageUrl?: string; 
+  content: string; 
   category?: string;
-  author?: string; // Added to match mock-data
+  author?: string; 
 }
 
 export interface Equipo {
@@ -49,4 +49,18 @@ export interface Equipo {
   nombreCorto: string;
   estadio: string;
   escudoUrl: string;
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number; // Price in a numeric format, e.g., UYU
+  imageUrl: string;
+  imageHint: string;
+  category?: string;
+}
+
+export interface CartItem extends Product {
+  quantity: number;
 }

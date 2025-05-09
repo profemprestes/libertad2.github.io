@@ -1,14 +1,16 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, CalendarDays, Home, Mail, Newspaper, ShieldCheck, Users, ShoppingBag } from 'lucide-react';
+import { BookOpen, CalendarDays, Home, Mail, Newspaper, ShieldCheck, Users, ShoppingBag, ShoppingCart } from 'lucide-react';
 import { ClubLogo } from '@/components/club/club-logo';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useCart } from '@/contexts/cart-context';
+import { Badge } from '@/components/ui/badge';
 
 const navItems = [
   { href: '/', label: 'Inicio', icon: Home },
@@ -23,29 +25,49 @@ const navItems = [
 export function Header() {
   const pathname = usePathname();
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
+  const { getTotalItems } = useCart();
+  const [totalCartItems, setTotalCartItems] = useState(0);
+  const [isClient, setIsClient] = useState(false);
 
-  const NavLink = ({ href, label, icon: Icon }: { href: string; label: string; icon: React.ElementType }) => {
-    const isTiendaLink = href === '/tienda';
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      setTotalCartItems(getTotalItems());
+    }
+  }, [getTotalItems, isClient, pathname]); // Re-check on pathname change if cart updates don't trigger it
+
+
+  const NavLink = ({ href, label, icon: Icon, isCartLink = false }: { href: string; label: string; icon: React.ElementType; isCartLink?: boolean }) => {
     const isActive = pathname === href;
 
     return (
       <Link
         href={href}
         className={cn(
-          "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ease-in-out",
+          "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ease-in-out relative",
           "md:text-base md:px-4", 
-          isTiendaLink
-            ? "bg-accent text-accent-foreground hover:bg-accent/90 shadow-md transform hover:scale-105"
-            : isActive
-              ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-              : 'text-foreground hover:bg-secondary hover:text-secondary-foreground',
-          isTiendaLink && isActive ? "ring-2 ring-offset-1 ring-accent-foreground/70" : ""
+          isCartLink 
+            ? "text-primary hover:bg-primary/10"
+            : href === '/tienda'
+              ? "bg-accent text-accent-foreground hover:bg-accent/90 shadow-md transform hover:scale-105"
+              : isActive
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                : 'text-foreground hover:bg-secondary hover:text-secondary-foreground',
+          (href === '/tienda' && isActive) ? "ring-2 ring-offset-1 ring-accent-foreground/70" : ""
         )}
         onClick={() => setIsSheetOpen(false)}
         aria-current={isActive ? "page" : undefined}
       >
         <Icon className="mr-2 h-5 w-5 shrink-0" />
         <span className="truncate">{label}</span>
+        {isCartLink && isClient && totalCartItems > 0 && (
+          <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center text-xs">
+            {totalCartItems}
+          </Badge>
+        )}
       </Link>
     );
   };
@@ -63,24 +85,15 @@ export function Header() {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-          {navItems.filter(item => item.href !== '/tienda').map((item) => (
+          {navItems.map((item) => (
             <NavLink key={item.href} {...item} />
           ))}
-          {/* Tienda link separated for distinct styling */}
-          {navItems.find(item => item.href === '/tienda') && (
-             <NavLink 
-                key="/tienda" 
-                href="/tienda" 
-                label="Tienda" 
-                icon={ShoppingBag} 
-            />
-          )}
+           <NavLink href="/cart" label="Carrito" icon={ShoppingCart} isCartLink />
         </nav>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-2">
+           <NavLink href="/cart" label="" icon={ShoppingCart} isCartLink />
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Alternar Menú">

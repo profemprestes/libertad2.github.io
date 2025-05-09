@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
+import { CartProvider } from '@/contexts/cart-context';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,12 +36,14 @@ export default function RootLayout({
           "antialiased flex flex-col min-h-screen"
         )}
       >
-        <Header />
-        <main className="flex-grow container mx-auto px-4 py-8">
-          {children}
-        </main>
-        <Footer />
-        <Toaster />
+        <CartProvider>
+          <Header />
+          <main className="flex-grow container mx-auto px-4 py-8">
+            {children}
+          </main>
+          <Footer />
+          <Toaster />
+        </CartProvider>
       </body>
     </html>
   );
