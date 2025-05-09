@@ -1,58 +1,91 @@
 'use client';
 
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { SectionTitle } from '@/components/shared/section-title';
-import { FileText, Copy, AlertCircle } from 'lucide-react';
+import { FileText, Copy, AlertCircle, LogIn, LogOut, ShieldCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-interface FormData {
+interface PromptFormData {
   elementType: string;
   elementName: string;
   elementDescription: string;
 }
 
-interface FormErrors {
+interface PromptFormErrors {
   elementType?: string;
   elementName?: string;
   elementDescription?: string;
 }
 
+const LOGIN_USER = 'LibertadAdmin';
+const LOGIN_PASS = 'DecanoCanario';
+const SESSION_KEY = 'promptGenSession';
+
 export default function PromptGeneratorPage() {
-  const [formData, setFormData] = useState<FormData>({
+  const [isClient, setIsClient] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  // Existing states for prompt generator
+  const [formData, setFormData] = useState<PromptFormData>({
     elementType: '',
     elementName: '',
     elementDescription: '',
   });
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('');
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [formErrors, setFormErrors] = useState<PromptFormErrors>({});
   const { toast } = useToast();
+
+  useEffect(() => {
+    setIsClient(true);
+    // Check for existing session on component mount
+    if (localStorage.getItem(SESSION_KEY) === 'loggedIn') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = (e: FormEvent) => {
+    e.preventDefault();
+    if (username === LOGIN_USER && password === LOGIN_PASS) {
+      localStorage.setItem(SESSION_KEY, 'loggedIn');
+      setIsAuthenticated(true);
+      setLoginError('');
+      setUsername(''); // Clear input fields after successful login
+      setPassword('');
+    } else {
+      setLoginError('Usuario o contraseña incorrectos.');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem(SESSION_KEY);
+    setIsAuthenticated(false);
+    // Optionally, you can clear form data as well if needed
+    // setFormData({ elementType: '', elementName: '', elementDescription: '' });
+    // setGeneratedPrompt('');
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for the field being edited
-    if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
+    if (formErrors[name as keyof PromptFormErrors]) {
+      setFormErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
 
   const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-    if (!formData.elementType.trim()) {
-      newErrors.elementType = 'El tipo de elemento es obligatorio.';
-    }
-    if (!formData.elementName.trim()) {
-      newErrors.elementName = 'El nombre del nuevo elemento es obligatorio.';
-    }
-    if (!formData.elementDescription.trim()) {
-      newErrors.elementDescription = 'La descripción detallada es obligatoria.';
-    }
-    setErrors(newErrors);
+    const newErrors: PromptFormErrors = {};
+    if (!formData.elementType.trim()) newErrors.elementType = 'El tipo de elemento es obligatorio.';
+    if (!formData.elementName.trim()) newErrors.elementName = 'El nombre del nuevo elemento es obligatorio.';
+    if (!formData.elementDescription.trim()) newErrors.elementDescription = 'La descripción detallada es obligatoria.';
+    setFormErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
@@ -66,7 +99,6 @@ export default function PromptGeneratorPage() {
       });
       return;
     }
-
     const promptTemplate = `Crea un nuevo [${formData.elementType}] llamado [${formData.elementName}]. Este [${formData.elementType.toLowerCase()}] debe [${formData.elementDescription}].
 Para asegurar la correcta integración y consistencia con el proyecto, sigue estos pasos:
 
@@ -81,45 +113,97 @@ Para asegurar la correcta integración y consistencia con el proyecto, sigue est
 5.  **Documentación:** Incluye comentarios en el código para explicar las decisiones tomadas y la funcionalidad del nuevo elemento.
 
 Recuerda priorizar la modularidad, la reutilización de código y la consistencia con el estilo general del proyecto.`;
-
     setGeneratedPrompt(promptTemplate);
   };
 
   const handleCopyPrompt = async () => {
     if (!generatedPrompt) {
-      toast({
-        title: 'Nada que copiar',
-        description: 'Primero genera un prompt.',
-        variant: 'destructive',
-      });
+      toast({ title: 'Nada que copiar', description: 'Primero genera un prompt.', variant: 'destructive' });
       return;
     }
     try {
       await navigator.clipboard.writeText(generatedPrompt);
-      toast({
-        title: 'Prompt Copiado',
-        description: 'El prompt ha sido copiado al portapapeles.',
-      });
+      toast({ title: 'Prompt Copiado', description: 'El prompt ha sido copiado al portapapeles.' });
     } catch (err) {
       console.error('Error al copiar el prompt: ', err);
-      toast({
-        title: 'Error al Copiar',
-        description: 'No se pudo copiar el prompt al portapapeles.',
-        variant: 'destructive',
-      });
+      toast({ title: 'Error al Copiar', description: 'No se pudo copiar el prompt.', variant: 'destructive' });
     }
   };
 
+  if (!isClient) {
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100vh-10rem)]">
+        <p className="text-muted-foreground text-lg">Cargando generador de prompts...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] bg-background p-4">
+        <Card className="w-full max-w-md shadow-2xl">
+          <CardHeader className="text-center">
+            <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-2" />
+            <CardTitle className="text-2xl font-bold text-primary">Acceso Restringido</CardTitle>
+            <CardDescription>Por favor, inicia sesión para acceder al generador de prompts.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleLogin} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="username">Usuario</Label>
+                <Input
+                  id="username"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Tu nombre de usuario"
+                  required
+                  className="bg-input"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Contraseña</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Tu contraseña"
+                  required
+                  className="bg-input"
+                />
+              </div>
+              {loginError && (
+                <p className="text-sm text-destructive flex items-center">
+                  <AlertCircle className="h-4 w-4 mr-1" /> {loginError}
+                </p>
+              )}
+              <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                <LogIn className="mr-2 h-4 w-4" /> Iniciar Sesión
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <SectionTitle
-        title="Generador de Prompts Técnicos"
-        icon={FileText}
-        description="Crea prompts estructurados para tareas de desarrollo de manera rápida y sencilla."
-      />
+      <div className="flex justify-between items-center mb-6">
+        <SectionTitle
+          title="Generador de Prompts Técnicos"
+          icon={FileText}
+          description="Crea prompts estructurados para tareas de desarrollo de manera rápida y sencilla."
+          className="mb-0 text-left" 
+          titleClassName="text-3xl lg:text-4xl"
+        />
+        <Button onClick={handleLogout} variant="outline" className="border-destructive text-destructive hover:bg-destructive/10 hover:text-destructive">
+          <LogOut className="mr-2 h-4 w-4" /> Cerrar Sesión
+        </Button>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        {/* Form Card */}
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl text-primary">Definir Elemento</CardTitle>
@@ -136,9 +220,9 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
                   onChange={handleChange}
                   placeholder="Ej: componente, sección, archivo de datos"
                   className="mt-1"
-                  aria-invalid={!!errors.elementType}
+                  aria-invalid={!!formErrors.elementType}
                 />
-                {errors.elementType && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{errors.elementType}</p>}
+                {formErrors.elementType && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{formErrors.elementType}</p>}
               </div>
 
               <div>
@@ -150,9 +234,9 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
                   onChange={handleChange}
                   placeholder="Ej: HeroBanner, ProductCard, userData.ts"
                   className="mt-1"
-                  aria-invalid={!!errors.elementName}
+                  aria-invalid={!!formErrors.elementName}
                 />
-                {errors.elementName && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{errors.elementName}</p>}
+                {formErrors.elementName && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{formErrors.elementName}</p>}
               </div>
 
               <div>
@@ -165,9 +249,9 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
                   placeholder="Describe la funcionalidad, contenido, y cualquier detalle relevante..."
                   className="mt-1"
                   rows={5}
-                  aria-invalid={!!errors.elementDescription}
+                  aria-invalid={!!formErrors.elementDescription}
                 />
-                {errors.elementDescription && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{errors.elementDescription}</p>}
+                {formErrors.elementDescription && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{formErrors.elementDescription}</p>}
               </div>
 
               <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
@@ -177,7 +261,6 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
           </CardContent>
         </Card>
 
-        {/* Generated Prompt Card */}
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl text-primary">Prompt Generado</CardTitle>
