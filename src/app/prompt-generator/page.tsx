@@ -8,21 +8,23 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { SectionTitle } from '@/components/shared/section-title';
-import { FileText, Copy, AlertCircle, LogIn, LogOut, ShieldCheck } from 'lucide-react';
+import { FileText, Copy, AlertCircle, LogIn, LogOut, ShieldCheck, FolderOpen } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from '@/components/ui/checkbox';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface PromptFormData {
   elementType: string;
   elementName: string;
-  integrationTarget?: string; // New field
+  integrationTarget: string; // Kept as string, will be comma-separated
   elementDescription: string;
 }
 
 interface PromptFormErrors {
   elementType?: string;
   elementName?: string;
-  // integrationTarget is optional, so no specific error message needed unless a rule is added
+  // integrationTarget is optional
   elementDescription?: string;
 }
 
@@ -37,6 +39,23 @@ const elementTypes = [
   { value: "page", label: "Página (page.tsx)" },
 ];
 
+const commonIntegrationTargets = [
+  'src/app/page.tsx',
+  'src/app/layout.tsx',
+  'src/app/contact/page.tsx',
+  'src/app/history/page.tsx',
+  'src/app/matches/page.tsx',
+  'src/app/news/page.tsx',
+  'src/app/roster/page.tsx',
+  'src/app/tienda/page.tsx',
+  'src/app/cart/page.tsx',
+  'src/app/haztesocio/page.tsx',
+  'src/components/layout/header.tsx',
+  'src/components/layout/footer.tsx',
+  // Add other relevant files as needed
+];
+
+
 export default function PromptGeneratorPage() {
   const [isClient, setIsClient] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -47,9 +66,10 @@ export default function PromptGeneratorPage() {
   const [formData, setFormData] = useState<PromptFormData>({
     elementType: '',
     elementName: '',
-    integrationTarget: '', // Initialize new field
+    integrationTarget: '',
     elementDescription: '',
   });
+  const [selectedIntegrationFiles, setSelectedIntegrationFiles] = useState<string[]>([]);
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('');
   const [formErrors, setFormErrors] = useState<PromptFormErrors>({});
   const { toast } = useToast();
@@ -94,12 +114,19 @@ export default function PromptGeneratorPage() {
     }
   };
 
+  const handleIntegrationFileChange = (filePath: string, isChecked: boolean) => {
+    const newSelection = isChecked
+      ? [...selectedIntegrationFiles, filePath]
+      : selectedIntegrationFiles.filter(file => file !== filePath);
+    setSelectedIntegrationFiles(newSelection);
+    setFormData(prev => ({ ...prev, integrationTarget: newSelection.join(', ') }));
+  };
+
   const validateForm = (): boolean => {
     const newErrors: PromptFormErrors = {};
     if (!formData.elementType.trim()) newErrors.elementType = 'El tipo de elemento es obligatorio.';
     if (!formData.elementName.trim()) newErrors.elementName = 'El nombre del nuevo elemento es obligatorio.';
     if (!formData.elementDescription.trim()) newErrors.elementDescription = 'La descripción detallada es obligatoria.';
-    // integrationTarget is optional, so no validation for emptiness here
     setFormErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -114,10 +141,13 @@ export default function PromptGeneratorPage() {
       });
       return;
     }
-
-    const integrationInstruction = formData.integrationTarget?.trim()
-      ? `Integración Específica: Este [${formData.elementType.toLowerCase()}] debe ser integrado o sus exportaciones utilizadas en el/los siguiente(s) archivo(s): [${formData.integrationTarget.trim()}]. Asegúrate de añadir las importaciones y el uso necesario en dicho(s) archivo(s).`
-      : `Consulta: Primero, indica en qué archivo existente del proyecto debo importar o utilizar este nuevo elemento.`;
+    
+    let integrationInstruction;
+    if (formData.integrationTarget.trim()) {
+      integrationInstruction = `Integración Específica: Este [${formData.elementType.toLowerCase()}] debe ser integrado o sus exportaciones utilizadas en el/los siguiente(s) archivo(s): [${formData.integrationTarget.trim()}]. Asegúrate de añadir las importaciones y el uso necesario en dicho(s) archivo(s).`;
+    } else {
+      integrationInstruction = `Consulta: Primero, indica en qué archivo existente del proyecto debo importar o utilizar este nuevo elemento. Si no se especifica uno, sugiere ubicaciones comunes basadas en el tipo de elemento (ej. páginas principales, layout, etc.).`;
+    }
 
     const promptTemplate = `Crea un nuevo [${formData.elementType}] llamado [${formData.elementName}]. Este [${formData.elementType.toLowerCase()}] debe [${formData.elementDescription}].
 Para asegurar la correcta integración y consistencia con el proyecto, sigue estos pasos:
@@ -236,9 +266,9 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
                 <Select
                   value={formData.elementType}
                   onValueChange={handleElementTypeChange}
-                  name="elementType"
+                  // name="elementType" // Not needed directly for Select, handled by onValueChange
                 >
-                  <SelectTrigger className="mt-1 w-full" aria-invalid={!!formErrors.elementType}>
+                  <SelectTrigger className="mt-1 w-full" aria-invalid={!!formErrors.elementType} id="elementType">
                     <SelectValue placeholder="Selecciona un tipo de elemento" />
                   </SelectTrigger>
                   <SelectContent>
@@ -267,18 +297,40 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
               </div>
 
               <div>
-                <Label htmlFor="integrationTarget" className="text-foreground">Archivo(s) de Integración (Opcional)</Label>
+                <Label htmlFor="integrationTarget" className="text-foreground mb-1 flex items-center">
+                  <FolderOpen className="h-4 w-4 mr-2 text-primary" />
+                  Archivo(s) de Integración (Opcional)
+                </Label>
+                <ScrollArea className="mt-1 h-40 w-full rounded-md border p-3 bg-muted/30">
+                  <div className="space-y-2">
+                    {commonIntegrationTargets.map(filePath => {
+                      const uniqueId = `checkbox-${filePath.replace(/[\/\.]/g, '-')}`;
+                      return (
+                        <div key={uniqueId} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={uniqueId}
+                            checked={selectedIntegrationFiles.includes(filePath)}
+                            onCheckedChange={(checked) => handleIntegrationFileChange(filePath, !!checked)}
+                          />
+                          <Label htmlFor={uniqueId} className="text-sm font-normal text-foreground/80 cursor-pointer">
+                            {filePath}
+                          </Label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </ScrollArea>
                 <Textarea
                   id="integrationTarget"
                   name="integrationTarget"
                   value={formData.integrationTarget}
                   onChange={handleChange}
-                  placeholder="Ej: src/app/page.tsx, src/components/layout/Header.tsx (separados por coma si son varios)"
-                  className="mt-1"
+                  placeholder="O escribe rutas adicionales separadas por coma si no están en la lista..."
+                  className="mt-2"
                   rows={2}
                 />
-                {/* No error message for integrationTarget as it's optional */}
               </div>
+
 
               <div>
                 <Label htmlFor="elementDescription" className="text-foreground">Descripción Detallada</Label>
