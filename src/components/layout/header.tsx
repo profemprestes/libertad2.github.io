@@ -16,8 +16,8 @@ const navItems = [
   { href: '/roster', label: 'Plantilla', icon: Users },
   { href: '/matches', label: 'Partidos', icon: CalendarDays },
   { href: '/news', label: 'Noticias', icon: Newspaper },
-  { href: '/tienda', label: 'Tienda', icon: ShoppingBag },
   { href: '/contact', label: 'Contacto', icon: Mail },
+  { href: '/tienda', label: 'Tienda', icon: ShoppingBag },
 ];
 
 export function Header() {
