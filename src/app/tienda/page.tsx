@@ -22,8 +22,9 @@ export default function TiendaPage() {
         description="Descubrí productos exclusivos del Club Atlético Libertad y lucí los colores con orgullo."
         className="pt-12"
       />
-      <Productostienda /> {/* Integrated Productostienda component */}
       <ComoComprar />
+      <Productostienda /> {/* Integrated Productostienda component */}
+    
     </div>
   );
 }
