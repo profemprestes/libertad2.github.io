@@ -177,12 +177,12 @@ export const mockNewsArticles: NewsArticle[] = [
 ];
 
 export const clubContactInfo = {
-  address: '123 Calle Libertad, Ciudad Principal, País',
-  phone: '+12 345 678 9010',
+  address: 'José Batlle y Ordóñez,Canelones, Departamento de Canelones',
+  phone: '+097 ... ...',
   email: 'info@clublibertad.example.com',
   socialMedia: [
-    { name: 'Facebook', url: 'https://facebook.com/clublibertad', icon: 'FacebookIcon' },
-    { name: 'Twitter', url: 'https://twitter.com/clublibertad', icon: 'TwitterIcon' },
-    { name: 'Instagram', url: 'https://instagram.com/clublibertad', icon: 'InstagramIcon' },
+    { name: 'Facebook', url: 'https://www.facebook.com/OficialCAL/', icon: 'FacebookIcon' },
+    { name: 'Twitter', url: 'https://x.com/decanocanario', icon: 'TwitterIcon' },
+    { name: 'Instagram', url: 'https://www.instagram.com/decanocanario', icon: 'InstagramIcon' },
   ]
 };

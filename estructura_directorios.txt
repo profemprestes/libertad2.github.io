@@ -9,6 +9,7 @@ public/
 │   ├── web-app-manifest-192x192.png
 │   └── web-app-manifest-512x512.png
 ├── rivales/
+│   └── juanico.png
 ├── tienda/
 │   ├── brazalete.jpg
 │   ├── camiseta1.jpg
@@ -77,6 +78,7 @@ src/
 │   │   ├── footer.tsx
 │   │   └── header.tsx
 │   ├── sections/
+│   │   ├── hero-historia.tsx
 │   │   ├── hero-principal.tsx
 │   │   ├── historia-resumen.tsx
 │   │   ├── latest-news-section.tsx
@@ -122,6 +124,7 @@ src/
 │   ├── use-mobile.tsx
 │   └── use-toast.ts
 ├── lib/
+│   ├── equipos-data.ts
 │   ├── mock-data.ts
 │   ├── noticias-data.ts
 │   └── utils.ts

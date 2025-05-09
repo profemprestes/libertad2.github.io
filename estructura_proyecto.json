@@ -59,6 +59,7 @@
         "upcoming-match-section.tsx": null,
         "hero-principal.tsx": null,
         "latest-news-section.tsx": null,
+        "hero-historia.tsx": null,
         "ultimasnoticias.tsx": null,
         "historia-resumen.tsx": null
       }
@@ -71,7 +72,8 @@
     "lib": {
       "mock-data.ts": null,
       "utils.ts": null,
-      "noticias-data.ts": null
+      "noticias-data.ts": null,
+      "equipos-data.ts": null
     },
     "types": {
       "index.ts": null
@@ -116,7 +118,9 @@
     "LogoLibertad.png": null,
     "HeroPrincipal.png": null,
     "HeroImagen.jpg": null,
-    "rivales": {},
+    "rivales": {
+      "juanico.png": null
+    },
     "tienda": {
       "jugador5.jpg": null,
       "libertadpuerta.jpg": null,
