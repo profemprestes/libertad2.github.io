@@ -57,9 +57,11 @@
       },
       "sections": {
         "upcoming-match-section.tsx": null,
+        "HeroContacto.tsx": null,
         "hero-principal.tsx": null,
         "latest-news-section.tsx": null,
         "hero-partidos.tsx": null,
+        "Haztesocio.tsx": null,
         "HeroNoticias.tsx": null,
         "hero-historia.tsx": null,
         "ultimasnoticias.tsx": null,
@@ -104,6 +106,9 @@
         "page.tsx": null
       },
       "roster": {
+        "page.tsx": null
+      },
+      "tienda": {
         "page.tsx": null
       },
       "contact": {

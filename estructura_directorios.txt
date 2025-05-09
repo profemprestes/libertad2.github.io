@@ -71,6 +71,8 @@ src/
 │   │   └── page.tsx
 │   ├── roster/
 │   │   └── page.tsx
+│   ├── tienda/
+│   │   └── page.tsx
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
@@ -91,6 +93,8 @@ src/
 │   │   ├── footer.tsx
 │   │   └── header.tsx
 │   ├── sections/
+│   │   ├── Haztesocio.tsx
+│   │   ├── HeroContacto.tsx
 │   │   ├── HeroNoticias.tsx
 │   │   ├── hero-historia.tsx
 │   │   ├── hero-partidos.tsx
