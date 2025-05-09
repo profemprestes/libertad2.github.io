@@ -3,11 +3,13 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Newspaper } from 'lucide-react';
-import { mockNewsArticles } from '@/lib/mock-data';
+import { noticias as allNoticias } from '@/lib/noticias-data'; // Changed import
 import { SectionTitle } from '@/components/shared/section-title';
 
 export function LatestNewsSection() {
-  const latestNews = mockNewsArticles.slice(0, 2);
+  // Sort news by date to get the latest ones
+  const sortedNews = [...allNoticias].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const latestNews = sortedNews.slice(0, 2);
 
   return (
     <section>
@@ -30,7 +32,8 @@ export function LatestNewsSection() {
             <div className="md:w-2/3 flex flex-col">
               <CardHeader>
                 <CardTitle className="text-xl hover:text-primary transition-colors">
-                  <Link href={`/news#${article.id}`}>{article.title}</Link>
+                  {/* Link to the specific news article page */}
+                  <Link href={`/news/${article.id}`}>{article.title}</Link>
                 </CardTitle>
                 <CardDescription>{new Date(article.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</CardDescription>
               </CardHeader>
@@ -39,7 +42,8 @@ export function LatestNewsSection() {
               </CardContent>
               <CardFooter>
                 <Button variant="link" asChild className="text-primary hover:text-primary/80 p-0">
-                  <Link href={`/news#${article.id}`}>
+                  {/* Link to the specific news article page */}
+                  <Link href={`/news/${article.id}`}>
                     Leer Más <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </Button>

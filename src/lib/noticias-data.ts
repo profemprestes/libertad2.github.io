@@ -3,38 +3,56 @@ import type { NewsArticle } from '@/types';
 export const noticias: NewsArticle[] = [
   {
     id: 'noticia-1',
-    title: '¡Gran Victoria del Gumarelo en el Clásico!',
-    date: '2024-08-01T10:00:00Z',
-    summary: 'Club Libertad demostró su garra y se impuso con un contundente 3-0 ante su rival tradicional, desatando la alegría de su hinchada.',
-    imageUrl: 'https://picsum.photos/seed/noticia1/400/250',
-    content: 'En una tarde soleada y con un estadio repleto, Club Atlético Libertad jugó uno de sus mejores partidos de la temporada. Desde el primer minuto, el equipo mostró una actitud ofensiva y un gran despliegue físico.\nLos goles llegaron por medio de Roque Santa Cruz, Lorenzo Melgarejo y una joya de tiro libre de Héctor Villalba. El técnico Ariel Galeano destacó el compromiso de sus jugadores y la importancia de esta victoria para seguir peleando en lo más alto de la tabla.\nLa afición decabi celebró hasta altas horas de la noche este triunfo memorable.',
-    category: 'Primer Equipo',
+    title: '🔜 Próxima Fecha vs Calpino',
+    date: '2024-08-05T10:00:00Z',
+    summary: '🆚 Calpino en el Complejo El Colorado. 🕒 13:30 (Sub 15) | 15:30 (Sub 20)',
+    imageUrl: '/noticias/noticia1.jpg',
+    content: `Este fin de semana se viene un nuevo desafío para nuestras formativas. 
+El equipo se enfrenta a Calpino en el Complejo El Colorado, con partidos programados para Sub 15 a las 13:30 y Sub 20 a las 15:30. 
+Invitamos a todas las familias, amigos y simpatizantes a alentar a nuestros jóvenes talentos.
+
+¡Vamos Libertad! 💪🏼
+    
+#FormativasCAL 🔴⚪️`,
+    category: 'Formativas',
   },
   {
     id: 'noticia-2',
-    title: 'Nuevas Incorporaciones Refuerzan el Plantel',
-    date: '2024-07-25T15:30:00Z',
-    summary: 'El club anunció la llegada de dos jóvenes promesas que se suman al plantel principal para aportar su talento y frescura.',
-    imageUrl: 'https://picsum.photos/seed/noticia2/400/250',
-    content: 'Pensando en los desafíos futuros, la directiva de Club Libertad concretó la incorporación de dos talentosos jugadores. Se trata del mediocampista creativo Juan Pérez, proveniente de las formativas, y el delantero Matías González, con experiencia en ligas menores.\nAmbos jugadores expresaron su entusiasmo por vestir la camiseta decabi y prometieron darlo todo en cada entrenamiento y partido. "Es un sueño cumplido llegar a un club tan grande como Libertad", comentó Pérez en su presentación oficial.',
-    category: 'Fichajes',
+    title: '✅ Se jugó la sexta 🫵🏼',
+    date: '2024-08-01T18:00:00Z',
+    summary: 'Nueva fecha disputada por las formativas con gran entrega y compromiso.',
+    imageUrl: '/noticias/noticia2.jpg',
+    content: `Las categorías juveniles de Libertad disputaron la sexta fecha del campeonato con resultados positivos y grandes momentos de fútbol.
+
+Los entrenadores destacaron la actitud, el compañerismo y el crecimiento continuo de nuestros jugadores. Seguimos apostando al desarrollo deportivo y humano de cada uno de ellos.
+
+#FormativasCAL 🔴⚪️`,
+    category: 'Formativas',
   },
   {
     id: 'noticia-3',
-    title: 'Libertad Avanza en la Copa: Próximo Rival Definido',
-    date: '2024-07-18T09:00:00Z',
-    summary: 'Tras una emocionante tanda de penales, el Gumarelo clasificó a la siguiente ronda de la copa y ya conoce a su próximo oponente.',
-    imageUrl: 'https://picsum.photos/seed/noticia3/400/250',
-    content: 'El camino de Club Libertad en la copa nacional continúa firme. Luego de un empate 1-1 en los 90 minutos, el equipo logró imponerse en la definición por penales gracias a la destacada actuación de su arquero Martín Silva.\nEl próximo desafío será ante el Club Nacional, un rival siempre complicado. El cuerpo técnico ya está analizando al oponente y preparando la estrategia para seguir avanzando en la competición. La hinchada se ilusiona con la posibilidad de sumar un nuevo título a las vitrinas del club.',
-    category: 'Copa',
+    title: '💪🏼 ¡VAMOS LIBERTAD!',
+    date: '2024-07-28T10:00:00Z',
+    summary: 'Las formativas siguen compitiendo con orgullo y pasión por los colores del club.',
+    imageUrl: '/noticias/noticia3.jpg',
+    content: `¡Orgullosos de nuestras formativas!
+
+Los más jóvenes del club están dejando todo en la cancha en cada fecha. Con esfuerzo y dedicación representan los valores del Glorioso Libertad. ¡Sigamos alentando juntos!
+
+#FormativasCAL 🔴⚪️`,
+    category: 'Formativas',
   },
   {
     id: 'noticia-4',
-    title: 'Escuela de Fútbol: Abiertas las Inscripciones',
-    date: '2024-07-10T12:00:00Z',
-    summary: 'La prestigiosa escuela de fútbol de Club Libertad abre sus puertas para nuevos talentos. ¡Inscribe a tus hijos!',
-    imageUrl: 'https://picsum.photos/seed/noticia4/400/250',
-    content: 'Como cada año, Club Atlético Libertad invita a niños y jóvenes a formar parte de su reconocida escuela de fútbol. Las inscripciones para la temporada 2024-2025 ya están abiertas en diversas categorías.\nCon un cuerpo técnico altamente calificado y unas instalaciones de primer nivel, la escuela busca no solo formar futbolistas, sino también inculcar valores como el respeto, la disciplina y el trabajo en equipo. Para más información sobre requisitos y horarios, acercarse a la secretaría del club o visitar la página web oficial.',
-    category: 'Formativas',
+    title: '✊🏼 ¡Feliz Día del Trabajador!',
+    date: '2024-05-01T08:00:00Z',
+    summary: 'Gracias a quienes trabajan y trabajaron incansablemente por Libertad.',
+    imageUrl: '/noticias/noticia4.jpg',
+    content: `Gracias a todos los que con esfuerzo, dedicación y pasión hacen posible el crecimiento de nuestra institución.
+
+Hoy saludamos a los trabajadores que forman parte de la historia del Club Libertad. ¡Feliz Día del Trabajador!
+
+#GloriosoLibertad 🔴⚪️`,
+    category: 'Institucional',
   },
 ];
