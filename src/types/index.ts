@@ -67,3 +67,9 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
+export interface Sub15Player {
+  nombre: string;
+  posicion: string; // Ej: Arquero, Defensa, Volante, Delantero
+  instagram: string; // usuario de Instagram, sin link
+  fechaNacimiento: string; // formato "DD/MM/AAAA"
+}

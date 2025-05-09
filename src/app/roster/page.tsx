@@ -5,7 +5,9 @@ import { SectionTitle } from '@/components/shared/section-title';
 import { mockPlayers } from '@/lib/mock-data';
 import { Users } from 'lucide-react';
 import { HeroEquipo } from '@/components/sections/HeroEquipo';
-import { NuestrasCategorias } from '@/components/sections/NuestrasCategorias'; // Import the new component
+import { NuestrasCategorias } from '@/components/sections/NuestrasCategorias'; 
+import { categoriaSub15 } from '@/lib/CategoriaSub15.data'; // Import Sub 15 data
+import { Sub15TeamRoster } from '@/components/club/Sub15TeamRoster'; // Import Sub 15 roster component
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
@@ -48,18 +50,26 @@ export default function RosterPage() {
     <div className="space-y-12 md:space-y-16 lg:space-y-20">
       <HeroEquipo />
       
-      <NuestrasCategorias /> {/* Add the new component here */}
+      <NuestrasCategorias /> 
 
       <SectionTitle 
-        id="plantel-completo" 
-        title="Plantel Principal" // Changed title to be more specific to the roster below
+        id="primera" 
+        title="Plantel Principal" 
         icon={Users}
         description="Detalle de jugadores y cuerpo técnico del primer equipo del Decano del Fútbol Canario."
-        className="pt-8" // Adjust padding if needed
+        className="pt-8" 
       />
-      <TeamRoster players={mockPlayers.filter(p => p.position !== 'Coach')} /> {/* Example: Filter out coaches if displayed separately */}
+      <TeamRoster players={mockPlayers} /> 
       
-      {/* Optionally, add specific sections for Sub-15 and Sub-20 rosters if data exists */}
+      <SectionTitle 
+        id="sub15" 
+        title="Plantel Sub-15" 
+        icon={Users}
+        description="El futuro del club en nuestra categoría Sub-15. Jóvenes promesas del Decano."
+        className="pt-8"
+      />
+      <Sub15TeamRoster players={categoriaSub15} />
+      
       {/* 
       <SectionTitle 
         id="sub20" 
@@ -68,18 +78,10 @@ export default function RosterPage() {
         description="Jóvenes promesas de nuestra categoría Sub-20."
         className="pt-8"
       />
-      // <TeamRoster players={mockSub20Players} /> // Assuming you have mockSub20Players
-
-      <SectionTitle 
-        id="sub15" 
-        title="Plantel Sub-15" 
-        icon={Users}
-        description="El futuro del club en nuestra categoría Sub-15."
-        className="pt-8"
-      />
-      // <TeamRoster players={mockSub15Players} /> // Assuming you have mockSub15Players 
+      // <TeamRoster players={mockSub20Players} /> // Assuming you have mockSub20Players 
       */}
 
     </div>
   );
 }
+
