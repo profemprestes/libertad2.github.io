@@ -1,0 +1,32 @@
+
+Crea un nuevo archivo llamado `fixturesub15sub20-data.ts` dentro de la carpeta `src/lib/`. Este archivo contendrá los datos del fixture para las categorías Sub 15 y Sub 20 del Club Atlético Libertad, correspondientes a la Serie A.
+
+El Club Atlético Libertad jugará contra los siguientes oponentes en este orden de fechas:
+Fecha 1: Juventud Melilla
+Fecha 2: Libertad Washington
+Fecha 3: Juanico
+Fecha 4: Liverpool CS
+Fecha 5: Villa Nelly Unido
+Fecha 6: Wanderers
+Fecha 7: Calpino
+
+Define una estructura de datos, preferiblemente un array de objetos, donde cada objeto represente un partido. Deberás generar dos partidos por cada fecha (uno para Sub 15 y otro para Sub 20) contra el oponente correspondiente.
+
+Para cada objeto de partido, incluye la siguiente información:
+- `id`: Un identificador único para el partido (ejemplo: 'sub15-fecha1-vs-juventudmelilla').
+- `fechaNumero`: El número de la fecha (del 1 al 7).
+- `category`: La categoría del partido ('Sub 15' o 'Sub 20').
+- `competition`: "Campeonato Sub 15 - Serie A" o "Campeonato Sub 20 - Serie A".
+- `date`: Una fecha y hora de ejemplo en formato ISO string. Puedes simular que las fechas ocurren semanalmente, con los partidos de Sub 15 y Sub 20 el mismo día pero en horarios diferentes (ej. Sub 15 a las 13:30 y Sub 20 a las 15:30). Comienza con una fecha futura.
+- `homeTeam`: El nombre del equipo local. Para este fixture, Club Atlético Libertad será el equipo local en todas las fechas.
+- `awayTeam`: El nombre completo del equipo visitante. Utiliza el nombre completo del oponente correspondiente a la fecha, obtenido desde `src/lib/equipos-data.ts` (búscalo por su `nombreCorto`).
+- `opponent`: El nombre corto del equipo oponente (ej. "Juventud Melilla").
+- `opponentLogoUrl`: La URL del logo del equipo oponente, obtenida de `src/lib/equipos-data.ts`.
+- `venue`: El estadio donde se juega el partido. Como Club Atlético Libertad es local en todas las fechas, usa "Estadio Libertad".
+- `status`: Establece el estado como 'upcoming' para todos los partidos.
+- `homeScore`: No incluir, ya que son partidos futuros.
+- `awayScore`: No incluir, ya que son partidos futuros.
+
+Asegúrate de importar los datos necesarios desde `src/lib/equipos-data.ts` para obtener la información de los oponentes (nombre completo, `opponentLogoUrl`). Si un oponente no se encuentra en `equipos-data.ts` al buscar por su `nombreCorto` (Juventud Melilla, Libertad Washington, Juanico, Liverpool CS, Villa Nelly Unido, Wanderers, Calpino), utiliza un placeholder razonable para el `opponentName` y `opponentLogoUrl`, e informa en un comentario dentro del archivo qué equipos no fueron encontrados.
+
+El array de partidos debe ser exportado para que pueda ser utilizado en otras partes de la aplicación.
