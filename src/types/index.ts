@@ -30,6 +30,8 @@ export interface Match {
   competition: string; // e.g., "League Match", "Cup Final"
   opponentLogoUrl?: string;
   highlightsUrl?: string; // Optional link to match highlights
+  fechaNumero?: number; // Optional: For fixture display
+  category?: 'Sub 15' | 'Sub 20' | string; // Optional: For category specific fixtures like Sub 15, Sub 20
 }
 
 export interface NewsArticle {
@@ -64,3 +66,4 @@ export interface Product {
 export interface CartItem extends Product {
   quantity: number;
 }
+
