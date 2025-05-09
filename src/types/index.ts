@@ -35,10 +35,9 @@ export interface Match {
 export interface NewsArticle {
   id: string;
   title: string;
-  date: string; // ISO string or a display-friendly string
-  summary: string;
-  content?: string; // Full content for a dedicated news page
-  imageUrl?: string;
-  category: 'Club News' | 'Match Report' | 'Transfer' | 'Community';
-  author?: string;
+  date: string; // ISO string for date
+  extract: string;
+  imageUrl?: string; // Placeholder URL for image
+  content: string; // Full content of the news
+  category?: string;
 }
