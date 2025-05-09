@@ -14,7 +14,7 @@ export function HeroTienda() {
         <Image 
           src="https://picsum.photos/seed/storeHero/1200/800" 
           alt="Variedad de productos oficiales del Club Atlético Libertad"
-          layout="fill"
+          fill // Replaced layout="fill" with fill
           objectFit="cover"
           className="bg-center"
           data-ai-hint="club merchandise display"
