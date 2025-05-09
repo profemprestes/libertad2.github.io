@@ -92,17 +92,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning className="h-full"> {/* Ensure html and body take full height */}
       <body 
         className={cn(
           geistSans.variable, 
           geistMono.variable, 
-          "antialiased flex flex-col min-h-screen bg-background text-foreground"
+          "antialiased flex flex-col min-h-screen bg-background text-foreground" // min-h-screen ensures body takes at least full viewport height
         )}
       >
         <CartProvider>
           <Header />
-          <main className="flex-grow container mx-auto px-4 py-8">
+          <main className="flex-grow container mx-auto px-4 py-8"> {/* flex-grow allows main to take available space */}
             {children}
           </main>
           <Footer />
