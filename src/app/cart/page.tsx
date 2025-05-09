@@ -8,23 +8,26 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Separator } from '@/components/ui/separator';
 import { Trash2, Plus, Minus, ShoppingCart, ArrowLeft } from 'lucide-react';
 import { SectionTitle } from '@/components/shared/section-title';
+import { useState } from 'react';
+import { FinalizeOrderModal } from '@/components/cart/FinalizeOrderModal';
 
 export default function CartPage() {
   const { cartItems, removeItem, updateQuantity, clearCart, getCartTotal, getTotalItems } = useCart();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleQuantityChange = (productId: string, currentQuantity: number, amount: number) => {
     const newQuantity = currentQuantity + amount;
     if (newQuantity >= 1) {
       updateQuantity(productId, newQuantity);
     } else if (newQuantity <= 0) {
-      removeItem(productId); // Or updateQuantity(productId, 0) if your logic handles it
+      removeItem(productId);
     }
   };
 
   const handleInputChange = (productId: string, e: React.ChangeEvent<HTMLInputElement>) => {
     let value = parseInt(e.target.value, 10);
     if (isNaN(value) || value < 1) {
-      value = 1; // Default to 1 if input is invalid or less than 1
+      value = 1; 
     }
     updateQuantity(productId, value);
   };
@@ -86,7 +89,7 @@ export default function CartPage() {
             ))}
           </div>
 
-          <Card className="lg:col-span-1 p-6 shadow-xl sticky top-24"> {/* Added sticky positioning */}
+          <Card className="lg:col-span-1 p-6 shadow-xl sticky top-24">
             <CardHeader className="pb-4">
               <CardTitle className="text-2xl text-primary">Resumen del Pedido</CardTitle>
             </CardHeader>
@@ -106,8 +109,11 @@ export default function CartPage() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-3 pt-6">
-              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-3">
-                Proceder al Pago (Simulado)
+              <Button 
+                onClick={() => setIsModalOpen(true)} 
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-3"
+              >
+                Finalizar Pedido
               </Button>
               <Button variant="outline" onClick={clearCart} className="w-full text-destructive hover:bg-destructive/10 hover:text-destructive border-destructive">
                 <Trash2 className="mr-2 h-4 w-4" /> Vaciar Carrito
@@ -120,6 +126,14 @@ export default function CartPage() {
             </CardFooter>
           </Card>
         </div>
+      )}
+      {isModalOpen && (
+        <FinalizeOrderModal
+          isOpen={isModalOpen}
+          onOpenChange={setIsModalOpen}
+          cartItems={cartItems}
+          getCartTotal={getCartTotal}
+        />
       )}
     </div>
   );
