@@ -35,7 +35,7 @@ export function HeroPrincipal() {
               Ver Partidos <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10 shadow-lg transition-transform hover:scale-105">
+          <Button asChild variant="outline" size="lg" className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10 shadow-lg transition-transform hover:scale-105">
             <Link href="/roster">
               Conoce al Equipo <Users className="ml-2 h-5 w-5" />
             </Link>
@@ -45,3 +45,4 @@ export function HeroPrincipal() {
     </section>
   );
 }
+
