@@ -57,7 +57,10 @@
       },
       "sections": {
         "upcoming-match-section.tsx": null,
-        "latest-news-section.tsx": null
+        "hero-principal.tsx": null,
+        "latest-news-section.tsx": null,
+        "ultimasnoticias.tsx": null,
+        "historia-resumen.tsx": null
       }
     },
     "server": {
@@ -67,7 +70,8 @@
     },
     "lib": {
       "mock-data.ts": null,
-      "utils.ts": null
+      "utils.ts": null,
+      "noticias-data.ts": null
     },
     "types": {
       "index.ts": null
@@ -86,7 +90,10 @@
       "layout.tsx": null,
       "globals.css": null,
       "news": {
-        "page.tsx": null
+        "page.tsx": null,
+        "[id]": {
+          "page.tsx": null
+        }
       },
       "history": {
         "page.tsx": null
@@ -133,6 +140,15 @@
       "resultado2.jpg": null,
       "sticker2.jpg": null,
       "camiseta1.jpg": null
+    },
+    "favicon": {
+      "web-app-manifest-192x192.png": null,
+      "favicon.ico": null,
+      "web-app-manifest-512x512.png": null,
+      "favicon.svg": null,
+      "favicon-96x96.png": null,
+      "site.webmanifest": null,
+      "apple-touch-icon.png": null
     }
   }
 }

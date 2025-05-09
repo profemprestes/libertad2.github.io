@@ -1,5 +1,13 @@
 Estructura de: /home/user/studio/public
 public/
+├── favicon/
+│   ├── apple-touch-icon.png
+│   ├── favicon-96x96.png
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── site.webmanifest
+│   ├── web-app-manifest-192x192.png
+│   └── web-app-manifest-512x512.png
 ├── rivales/
 ├── tienda/
 │   ├── brazalete.jpg
@@ -44,6 +52,8 @@ src/
 │   ├── matches/
 │   │   └── page.tsx
 │   ├── news/
+│   │   ├── [id]/
+│   │   │   └── page.tsx
 │   │   └── page.tsx
 │   ├── roster/
 │   │   └── page.tsx
@@ -67,7 +77,10 @@ src/
 │   │   ├── footer.tsx
 │   │   └── header.tsx
 │   ├── sections/
+│   │   ├── hero-principal.tsx
+│   │   ├── historia-resumen.tsx
 │   │   ├── latest-news-section.tsx
+│   │   ├── ultimasnoticias.tsx
 │   │   └── upcoming-match-section.tsx
 │   ├── shared/
 │   │   └── section-title.tsx
@@ -110,6 +123,7 @@ src/
 │   └── use-toast.ts
 ├── lib/
 │   ├── mock-data.ts
+│   ├── noticias-data.ts
 │   └── utils.ts
 ├── server/
 │   └── actions/
