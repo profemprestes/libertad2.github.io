@@ -12,12 +12,12 @@ export function HeroHistoria() {
         aria-hidden="true" 
       >
         <Image
-          src="/tienda/formatiivas1.jpg" 
-          alt="Imagen histórica de las formativas del Club Atlético Libertad" // Descriptive alt tag
+          src="/nuevas/escudo1906.jpg" 
+          alt="Escudo histórico del Club Atlético Libertad de 1906" // Descriptive alt tag
           layout="fill"
           objectFit="cover"
           className="bg-center"
-          data-ai-hint="historical soccer youth"
+          data-ai-hint="club shield"
         />
       </div>
 
@@ -48,3 +48,4 @@ export function HeroHistoria() {
     </section>
   );
 }
+
