@@ -17,7 +17,8 @@ import {
   Newspaper,
   ShoppingBag,
   ShoppingCart,
-  ChevronRight
+  ChevronRight,
+  ShieldPlus // Icon for Hazte Socio
 } from 'lucide-react';
 import type { ElementType } from 'react';
 import { clubContactInfo } from '@/lib/mock-data';
@@ -38,6 +39,7 @@ const mainSiteLinks: NavLinkItem[] = [
   { href: '/roster', label: 'Plantilla', icon: Users },
   { href: '/matches', label: 'Partidos', icon: CalendarDays },
   { href: '/news', label: 'Noticias', icon: Newspaper },
+  { href: '/haztesocio', label: 'Hazte Socio', icon: ShieldPlus }, // Added Hazte Socio link
   { href: '/contact', label: 'Contacto', icon: Mail },
 ];
 
@@ -66,7 +68,7 @@ const socialMediaLinks = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const { cartItems, getTotalItems } = useCart(); // cartItems dependency for useEffect
+  const { cartItems, getTotalItems } = useCart(); 
   const [totalCartItems, setTotalCartItems] = useState(0);
   const [isClient, setIsClient] = useState(false);
 
@@ -78,7 +80,7 @@ export function Footer() {
     if (isClient) {
       setTotalCartItems(getTotalItems());
     }
-  }, [getTotalItems, cartItems, isClient]); // Add cartItems to dependencies
+  }, [getTotalItems, cartItems, isClient]); 
 
   const NavListItem = ({ href, label, icon: Icon }: NavLinkItem) => (
     <li>
