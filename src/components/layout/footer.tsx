@@ -38,7 +38,7 @@ export function Footer() {
                 className="h-12 w-auto" 
               />
               <div className="flex flex-col">
-                <span className="font-semibold text-lg text-primary group-hover:text-accent transition-colors">
+                <span className="font-semibold text-lg text-foreground group-hover:text-accent transition-colors">
                   Club Atlético Libertad
                 </span>
                 <span className="text-xs text-muted-foreground">
