@@ -30,7 +30,7 @@ export function HeroPartidos() {
               Próximos Encuentros <CalendarCheck className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10 shadow-lg transition-transform hover:scale-105">
+          <Button asChild size="lg" className="bg-black/70 text-primary-foreground border border-primary-foreground/30 hover:bg-black/80 shadow-lg transition-transform hover:scale-105">
             <Link href="#proximos-resultados">
               Resultados Recientes <ListOrdered className="ml-2 h-5 w-5" />
             </Link>
