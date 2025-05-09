@@ -2,15 +2,25 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Users } from 'lucide-react';
 import { ClubLogo } from '@/components/club/club-logo';
+import Image from 'next/image';
 
 export function HeroPrincipal() {
   return (
     <section className="relative py-20 md:py-32 rounded-lg overflow-hidden shadow-xl bg-gradient-to-br from-primary via-primary/80 to-rose-700">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: "url('/tienda/hinchada.jpg')" }}
-        data-ai-hint="stadium crowd"
-      ></div>
+        className="absolute inset-0 opacity-20"
+        aria-hidden="true"
+      >
+        <Image 
+          src="/tienda/hinchada.jpg"
+          alt="Hinchada del Club Atlético Libertad"
+          layout="fill"
+          objectFit="cover"
+          className="bg-center"
+          data-ai-hint="stadium crowd"
+          priority // LCP Image Optimization
+        />
+      </div>
       <div className="relative container mx-auto px-4 text-center">
         <ClubLogo className="h-24 w-24 md:h-32 md:w-32 text-primary-foreground mx-auto mb-6 drop-shadow-lg" />
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-primary-foreground drop-shadow-md">
@@ -35,3 +45,4 @@ export function HeroPrincipal() {
     </section>
   );
 }
+

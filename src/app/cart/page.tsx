@@ -8,12 +8,23 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Separator } from '@/components/ui/separator';
 import { Trash2, Plus, Minus, ShoppingCart, ArrowLeft } from 'lucide-react';
 import { SectionTitle } from '@/components/shared/section-title';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FinalizeOrderModal } from '@/components/cart/FinalizeOrderModal';
+// Note: Metadata for client components should be handled at the nearest Server Component parent or layout.
+// For simplicity in this structure, if this page were a Server Component, metadata would be here.
+// Since it's 'use client', its metadata is effectively inherited or set by layout.tsx or a parent server component.
+// We can add a basic title via document.title if needed, but full metadata object is for Server Components.
 
 export default function CartPage() {
   const { cartItems, removeItem, updateQuantity, clearCart, getCartTotal, getTotalItems } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    document.title = 'Carrito de Compras | Club Atlético Libertad';
+  }, []);
+
 
   const handleQuantityChange = (productId: string, currentQuantity: number, amount: number) => {
     const newQuantity = currentQuantity + amount;
@@ -32,6 +43,9 @@ export default function CartPage() {
     updateQuantity(productId, value);
   };
   
+  if (!isClient) {
+    return null; // Or a loading skeleton
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -138,3 +152,4 @@ export default function CartPage() {
     </div>
   );
 }
+

@@ -3,12 +3,35 @@ import { ClubInfo } from '@/components/club/club-info';
 import { SectionTitle } from '@/components/shared/section-title';
 import { clubContactInfo } from '@/lib/mock-data';
 import { Mail } from 'lucide-react';
-import { HeroContacto } from '@/components/sections/HeroContacto'; // Corrected import name
+import { HeroContacto } from '@/components/sections/HeroContacto';
 import type { Metadata } from 'next';
 
+// IMPORTANT: Update this with your actual production URL
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+
 export const metadata: Metadata = {
-  title: 'Contacto | Club Libertad',
-  description: 'Ponte en contacto con el Club Atlético Libertad. Encuentra nuestra dirección, teléfono, email y redes sociales.',
+  title: 'Contacto',
+  description: 'Ponte en contacto con el Club Atlético Libertad. Encuentra nuestra dirección, teléfono, email, redes sociales y envíanos un mensaje.',
+  keywords: ['contacto club libertad', 'club libertad teléfono', 'club libertad email', 'dirección club libertad', 'consultas club libertad'],
+  authors: [{ name: 'Club Atlético Libertad' }],
+  openGraph: {
+    title: 'Contacto - Club Atlético Libertad',
+    description: 'Ponte en contacto con el Club Atlético Libertad. Encuentra nuestros datos y envíanos un mensaje.',
+    url: `${SITE_URL}/contact`,
+    images: [
+      {
+        url: '/LogoLibertad.png',
+        width: 512,
+        height: 512,
+        alt: 'Logo Club Atlético Libertad',
+      },
+    ],
+  },
+  twitter: {
+    title: 'Contacto - Club Atlético Libertad',
+    description: 'Ponte en contacto con el Club Atlético Libertad.',
+    images: [`${SITE_URL}/LogoLibertad.png`],
+  },
 };
 
 export default function ContactPage() {
@@ -16,11 +39,11 @@ export default function ContactPage() {
     <div>
       <HeroContacto />
       <SectionTitle 
-        id="formulario" // Changed ID to match HeroContacto anchor
+        id="formulario" 
         title="Información de Contacto y Formulario" 
         icon={Mail}
         description="Utiliza el formulario para enviarnos un mensaje o encuéntranos a través de los siguientes canales."
-        className="pt-12" // Added padding top to separate from HeroContacto
+        className="pt-12" 
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <ContactForm />
@@ -34,3 +57,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

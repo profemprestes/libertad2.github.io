@@ -7,6 +7,9 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+// IMPORTANT: Update this with your actual production URL
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+
 export async function generateStaticParams() {
   return noticias.map((noticia) => ({
     id: noticia.id,
@@ -19,14 +22,41 @@ interface NewsDetailPageProps {
 
 export async function generateMetadata({ params }: NewsDetailPageProps): Promise<Metadata> {
   const noticia = noticias.find((n) => n.id === params.id);
+  
   if (!noticia) {
     return {
       title: 'Noticia no encontrada',
+      description: 'La noticia que buscas no está disponible.',
     };
   }
+
+  const imageUrl = noticia.imageUrl ? (noticia.imageUrl.startsWith('http') ? noticia.imageUrl : `${SITE_URL}${noticia.imageUrl}`) : `${SITE_URL}/LogoLibertad.png`;
+
   return {
-    title: `${noticia.title} | Club Libertad`,
-    description: noticia.summary, // Changed from extract to summary
+    title: noticia.title,
+    description: noticia.summary,
+    keywords: [noticia.title, 'Club Atlético Libertad', 'noticias', noticia.category || 'fútbol'],
+    authors: [{ name: noticia.author || 'Club Atlético Libertad' }],
+    openGraph: {
+      title: noticia.title,
+      description: noticia.summary,
+      url: `${SITE_URL}/news/${noticia.id}`,
+      type: 'article',
+      publishedTime: noticia.date,
+      authors: [noticia.author || 'Club Atlético Libertad'],
+      images: [
+        {
+          url: imageUrl,
+          alt: noticia.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: noticia.title,
+      description: noticia.summary,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -62,10 +92,11 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
             <div className="relative aspect-[16/9] w-full">
               <Image
                 src={noticia.imageUrl}
-                alt={noticia.title}
+                alt={noticia.title} // Ensuring alt text is descriptive
                 layout="fill"
                 objectFit="cover"
                 data-ai-hint="news main image"
+                priority // Prioritize loading for LCP
               />
             </div>
           )}
@@ -86,11 +117,11 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
           </div>
         </CardHeader>
         <CardContent className="p-6 pt-0">
-          <div className="text-lg text-foreground space-y-4">
+          <article className="prose prose-lg max-w-none text-foreground space-y-4 dark:prose-invert"> {/* Added prose for better article styling */}
             {noticia.content.split('\n').map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
-          </div>
+          </article>
         </CardContent>
          <CardFooter className="p-6 pt-2">
              <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">
@@ -103,3 +134,4 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
     </div>
   );
 }
+

@@ -1,15 +1,43 @@
-
+import type { Metadata } from 'next';
 import { SectionTitle } from '@/components/shared/section-title';
 import { ShoppingBag } from 'lucide-react';
-import type { Metadata } from 'next';
 import { HeroTienda } from '@/components/sections/HeroTienda'; 
 import { ComoComprar } from '@/components/sections/comocomprar';
 import { ProductList } from '@/components/tienda/ProductList';
 import { tiendaProducts } from '@/lib/productos-tienda-data';
 
+// IMPORTANT: Update this with your actual production URL
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://clubatleticolibertad.example.com';
+
 export const metadata: Metadata = {
-  title: 'Tienda Oficial | Club Libertad',
-  description: 'Descubrí productos oficiales del Club Atlético Libertad. Camisetas, bufandas, merchandising y más para verdaderos hinchas.',
+  title: 'Tienda Oficial',
+  description: 'Descubrí productos oficiales del Club Atlético Libertad. Camisetas, bufandas, merchandising y más para verdaderos hinchas del Decano.',
+  keywords: ['tienda club libertad', 'merchandising libertad', 'comprar camiseta libertad', 'productos club libertad', 'regalos fútbol'],
+  authors: [{ name: 'Club Atlético Libertad' }],
+  openGraph: {
+    title: 'Tienda Oficial - Club Atlético Libertad',
+    description: 'Descubrí productos oficiales del Club Atlético Libertad y llevá los colores del Decano.',
+    url: `${SITE_URL}/tienda`,
+    images: [
+      {
+        url: '/tienda/camiseta1.jpg', // Example product image
+        width: 800,
+        height: 600,
+        alt: 'Productos Oficiales Club Atlético Libertad',
+      },
+      {
+        url: '/LogoLibertad.png',
+        width: 512,
+        height: 512,
+        alt: 'Logo Club Atlético Libertad',
+      }
+    ],
+  },
+  twitter: {
+    title: 'Tienda Oficial - Club Atlético Libertad',
+    description: 'Descubrí productos oficiales del Club Atlético Libertad.',
+    images: [`${SITE_URL}/tienda/camiseta1.jpg`],
+  },
 };
 
 export default function TiendaPage() {
@@ -25,7 +53,6 @@ export default function TiendaPage() {
       />
       <ProductList products={tiendaProducts} />
       <ComoComprar />
-      {/* Section for contacting about purchases, can be linked from modal or cart */}
       <section id="contacto-compra" className="py-12 md:py-16 bg-secondary">
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-2xl font-semibold text-primary mb-4">¿Preguntas sobre tu compra?</h3>
@@ -43,3 +70,4 @@ export default function TiendaPage() {
     </div>
   );
 }
+
