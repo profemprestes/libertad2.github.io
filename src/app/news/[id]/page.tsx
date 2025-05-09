@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: NewsDetailPageProps): Promise
   }
   return {
     title: `${noticia.title} | Club Libertad`,
-    description: noticia.extract,
+    description: noticia.summary, // Changed from extract to summary
   };
 }
 

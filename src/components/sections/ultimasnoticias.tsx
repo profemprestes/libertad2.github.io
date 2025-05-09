@@ -64,7 +64,7 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
                 </div>
               </CardHeader>
               <CardContent className="flex-grow pt-0">
-                <CardDescription className="text-sm line-clamp-3">{noticia.extract}</CardDescription>
+                <CardDescription className="text-sm line-clamp-3">{noticia.summary}</CardDescription>
               </CardContent>
               <CardFooter className="pt-3">
                 <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">

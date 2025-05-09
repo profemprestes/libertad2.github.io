@@ -36,8 +36,17 @@ export interface NewsArticle {
   id: string;
   title: string;
   date: string; // ISO string for date
-  extract: string;
+  summary: string; // Changed from extract to summary to match mock-data and news-card
   imageUrl?: string; // Placeholder URL for image
   content: string; // Full content of the news
   category?: string;
+  author?: string; // Added to match mock-data
+}
+
+export interface Equipo {
+  nombre: string;
+  direccion: string;
+  nombreCorto: string;
+  estadio: string;
+  escudoUrl: string;
 }
