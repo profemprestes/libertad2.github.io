@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Ticket, Star, ShoppingBag, Gift, Users } from 'lucide-react';
+import { Ticket, Star, ShoppingBag, Gift, Users, ShieldCheck } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface Beneficio {
@@ -44,7 +44,7 @@ const beneficios: Beneficio[] = [
     id: 'beneficio-6',
     title: 'Apoyo Directo al Club',
     description: 'Tu cuota social contribuye directamente al crecimiento y desarrollo de todas las disciplinas del Club Atlético Libertad.',
-    icon: ShieldCheck, // Assuming ShieldCheck is already imported where SectionTitle is used
+    icon: ShieldCheck, 
   },
 ];
 
@@ -69,3 +69,4 @@ export function BeneficiosSocio() {
     </section>
   );
 }
+
