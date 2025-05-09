@@ -3,6 +3,7 @@ import { SectionTitle } from '@/components/shared/section-title';
 import { partidos } from '@/lib/partidos-data';
 import { CalendarDays } from 'lucide-react';
 import type { Metadata } from 'next';
+import { HeroPartidos } from '@/components/sections/hero-partidos';
 
 export const metadata: Metadata = {
   title: 'Partidos y Resultados | Club Libertad',
@@ -12,10 +13,13 @@ export const metadata: Metadata = {
 export default function MatchesPage() {
   return (
     <div>
+      <HeroPartidos />
       <SectionTitle 
-        title="Partidos y Resultados" 
+        id="proximos-resultados" // Added ID for anchor links from HeroPartidos
+        title="Calendario y Marcadores" 
         icon={CalendarDays}
-        description="Mantente actualizado con los próximos partidos del Club Atlético Libertad y revisa los resultados pasados."
+        description="Explora el calendario de los próximos partidos y consulta los resultados de los encuentros anteriores del Club Atlético Libertad."
+        className="pt-12" // Add padding top to separate from HeroPartidos
       />
       <MatchSchedule matches={partidos} />
     </div>
