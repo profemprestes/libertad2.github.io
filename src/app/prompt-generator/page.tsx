@@ -15,12 +15,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 interface PromptFormData {
   elementType: string;
   elementName: string;
+  integrationTarget?: string; // New field
   elementDescription: string;
 }
 
 interface PromptFormErrors {
   elementType?: string;
   elementName?: string;
+  // integrationTarget is optional, so no specific error message needed unless a rule is added
   elementDescription?: string;
 }
 
@@ -45,6 +47,7 @@ export default function PromptGeneratorPage() {
   const [formData, setFormData] = useState<PromptFormData>({
     elementType: '',
     elementName: '',
+    integrationTarget: '', // Initialize new field
     elementDescription: '',
   });
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('');
@@ -96,6 +99,7 @@ export default function PromptGeneratorPage() {
     if (!formData.elementType.trim()) newErrors.elementType = 'El tipo de elemento es obligatorio.';
     if (!formData.elementName.trim()) newErrors.elementName = 'El nombre del nuevo elemento es obligatorio.';
     if (!formData.elementDescription.trim()) newErrors.elementDescription = 'La descripción detallada es obligatoria.';
+    // integrationTarget is optional, so no validation for emptiness here
     setFormErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -110,18 +114,23 @@ export default function PromptGeneratorPage() {
       });
       return;
     }
+
+    const integrationInstruction = formData.integrationTarget?.trim()
+      ? `Integración Específica: Este [${formData.elementType.toLowerCase()}] debe ser integrado o sus exportaciones utilizadas en el/los siguiente(s) archivo(s): [${formData.integrationTarget.trim()}]. Asegúrate de añadir las importaciones y el uso necesario en dicho(s) archivo(s).`
+      : `Consulta: Primero, indica en qué archivo existente del proyecto debo importar o utilizar este nuevo elemento.`;
+
     const promptTemplate = `Crea un nuevo [${formData.elementType}] llamado [${formData.elementName}]. Este [${formData.elementType.toLowerCase()}] debe [${formData.elementDescription}].
 Para asegurar la correcta integración y consistencia con el proyecto, sigue estos pasos:
 
-1.  **Consulta:** Primero, indica en qué archivo existente del proyecto debo importar o utilizar este nuevo elemento.
+${integrationInstruction}
 
-2.  **Análisis de Dependencias:** Analiza el código del nuevo elemento para identificar si requiere dependencias adicionales. Revisa la configuración general del proyecto (package.json y otros archivos de configuración) para determinar si estas dependencias ya están instaladas. Si no lo están, indica qué dependencias deben ser añadidas y su propósito.
+Análisis de Dependencias: Analiza el código del nuevo elemento para identificar si requiere dependencias adicionales. Revisa la configuración general del proyecto (package.json y otros archivos de configuración) para determinar si estas dependencias ya están instaladas. Si no lo están, indica qué dependencias deben ser añadidas y su propósito.
 
-3.  **Estilos:** Asegúrate de que el nuevo elemento se integre visualmente con el resto del proyecto. Revisa los archivos tailwind.config.ts y src/app/globals.css para entender el tema de colores, tipografía y estilos existentes. Utiliza EXCLUSIVAMENTE las clases de utilidad de Tailwind CSS y las variables CSS globales para dar estilo al nuevo elemento.
+Estilos: Asegúrate de que el nuevo elemento se integre visualmente con el resto del proyecto. Revisa los archivos tailwind.config.ts y src/app/globals.css para entender el tema de colores, tipografía y estilos existentes. Utiliza EXCLUSIVAMENTE las clases de utilidad de Tailwind CSS y las variables CSS globales para dar estilo al nuevo elemento.
 
-4.  **Creación e Integración:** Una vez que tengas la información sobre la ubicación de la importación, las dependencias y los estilos, crea el archivo en el directorio adecuado (siguiendo la estructura del proyecto) e inserta la importación y uso del nuevo elemento en el archivo especificado.
+Creación e Integración: Una vez que tengas la información sobre la ubicación de la importación (si no se especificó previamente), las dependencias y los estilos, crea el archivo en el directorio adecuado (siguiendo la estructura del proyecto) e inserta la importación y uso del nuevo elemento en el archivo especificado.
 
-5.  **Documentación:** Incluye comentarios en el código para explicar las decisiones tomadas y la funcionalidad del nuevo elemento.
+Documentación: Incluye comentarios en el código para explicar las decisiones tomadas y la funcionalidad del nuevo elemento.
 
 Recuerda priorizar la modularidad, la reutilización de código y la consistencia con el estilo general del proyecto.`;
     setGeneratedPrompt(promptTemplate);
@@ -255,6 +264,20 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
                   aria-invalid={!!formErrors.elementName}
                 />
                 {formErrors.elementName && <p className="text-sm text-destructive mt-1 flex items-center"><AlertCircle className="h-4 w-4 mr-1" />{formErrors.elementName}</p>}
+              </div>
+
+              <div>
+                <Label htmlFor="integrationTarget" className="text-foreground">Archivo(s) de Integración (Opcional)</Label>
+                <Textarea
+                  id="integrationTarget"
+                  name="integrationTarget"
+                  value={formData.integrationTarget}
+                  onChange={handleChange}
+                  placeholder="Ej: src/app/page.tsx, src/components/layout/Header.tsx (separados por coma si son varios)"
+                  className="mt-1"
+                  rows={2}
+                />
+                {/* No error message for integrationTarget as it's optional */}
               </div>
 
               <div>
