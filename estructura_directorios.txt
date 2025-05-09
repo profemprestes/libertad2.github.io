@@ -1,0 +1,119 @@
+Estructura de: /home/user/studio/public
+public/
+├── rivales/
+├── tienda/
+│   ├── brazalete.jpg
+│   ├── camiseta1.jpg
+│   ├── camiseta2.jpg
+│   ├── camiseta3.jpg
+│   ├── camiseta4.jpg
+│   ├── fixture.jpg
+│   ├── formativas1.jpg
+│   ├── hinchada.jpg
+│   ├── jugador1.jpg
+│   ├── jugador2.jpg
+│   ├── jugador3.jpg
+│   ├── jugador4.jpg
+│   ├── jugador5.jpg
+│   ├── jugador6.jpg
+│   ├── jugador7.jpg
+│   ├── libertadpuerta.jpg
+│   ├── plantel1.jpg
+│   ├── preciostienda.jpg
+│   ├── resultado1.jpg
+│   ├── resultado2.jpg
+│   ├── sticker1.jpg
+│   └── sticker2.jpg
+├── HeroImagen.jpg
+├── HeroPrincipal.png
+├── Liberdad Escudo.jpg
+├── Libertad.png
+├── Logo.svg
+└── LogoLibertad.png
+
+Estructura de: /home/user/studio/src
+src/
+├── ai/
+│   ├── dev.ts
+│   └── genkit.ts
+├── app/
+│   ├── contact/
+│   │   └── page.tsx
+│   ├── history/
+│   │   └── page.tsx
+│   ├── matches/
+│   │   └── page.tsx
+│   ├── news/
+│   │   └── page.tsx
+│   ├── roster/
+│   │   └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── club/
+│   │   ├── club-info.tsx
+│   │   ├── club-logo.tsx
+│   │   ├── contact-form.tsx
+│   │   ├── history-timeline.tsx
+│   │   ├── match-card.tsx
+│   │   ├── match-schedule.tsx
+│   │   ├── news-card.tsx
+│   │   ├── news-feed.tsx
+│   │   ├── player-card.tsx
+│   │   └── team-roster.tsx
+│   ├── layout/
+│   │   ├── footer.tsx
+│   │   └── header.tsx
+│   ├── sections/
+│   │   ├── latest-news-section.tsx
+│   │   └── upcoming-match-section.tsx
+│   ├── shared/
+│   │   └── section-title.tsx
+│   └── ui/
+│       ├── accordion.tsx
+│       ├── alert-dialog.tsx
+│       ├── alert.tsx
+│       ├── avatar.tsx
+│       ├── badge.tsx
+│       ├── button.tsx
+│       ├── calendar.tsx
+│       ├── card.tsx
+│       ├── chart.tsx
+│       ├── checkbox.tsx
+│       ├── dialog.tsx
+│       ├── dropdown-menu.tsx
+│       ├── form.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       ├── menubar.tsx
+│       ├── popover.tsx
+│       ├── progress.tsx
+│       ├── radio-group.tsx
+│       ├── scroll-area.tsx
+│       ├── select.tsx
+│       ├── separator.tsx
+│       ├── sheet.tsx
+│       ├── sidebar.tsx
+│       ├── skeleton.tsx
+│       ├── slider.tsx
+│       ├── switch.tsx
+│       ├── table.tsx
+│       ├── tabs.tsx
+│       ├── textarea.tsx
+│       ├── toast.tsx
+│       ├── toaster.tsx
+│       └── tooltip.tsx
+├── hooks/
+│   ├── use-mobile.tsx
+│   └── use-toast.ts
+├── lib/
+│   ├── mock-data.ts
+│   └── utils.ts
+├── server/
+│   └── actions/
+│       └── contact.ts
+└── types/
+    └── index.ts
+

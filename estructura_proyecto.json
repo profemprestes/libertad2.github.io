@@ -1,0 +1,138 @@
+{
+  "src": {
+    "components": {
+      "club": {
+        "team-roster.tsx": null,
+        "match-card.tsx": null,
+        "club-info.tsx": null,
+        "news-feed.tsx": null,
+        "club-logo.tsx": null,
+        "news-card.tsx": null,
+        "player-card.tsx": null,
+        "contact-form.tsx": null,
+        "match-schedule.tsx": null,
+        "history-timeline.tsx": null
+      },
+      "ui": {
+        "form.tsx": null,
+        "slider.tsx": null,
+        "table.tsx": null,
+        "toast.tsx": null,
+        "alert-dialog.tsx": null,
+        "scroll-area.tsx": null,
+        "separator.tsx": null,
+        "tooltip.tsx": null,
+        "radio-group.tsx": null,
+        "skeleton.tsx": null,
+        "sheet.tsx": null,
+        "input.tsx": null,
+        "badge.tsx": null,
+        "chart.tsx": null,
+        "progress.tsx": null,
+        "alert.tsx": null,
+        "popover.tsx": null,
+        "switch.tsx": null,
+        "toaster.tsx": null,
+        "select.tsx": null,
+        "calendar.tsx": null,
+        "button.tsx": null,
+        "sidebar.tsx": null,
+        "textarea.tsx": null,
+        "checkbox.tsx": null,
+        "accordion.tsx": null,
+        "avatar.tsx": null,
+        "tabs.tsx": null,
+        "card.tsx": null,
+        "menubar.tsx": null,
+        "label.tsx": null,
+        "dialog.tsx": null,
+        "dropdown-menu.tsx": null
+      },
+      "layout": {
+        "header.tsx": null,
+        "footer.tsx": null
+      },
+      "shared": {
+        "section-title.tsx": null
+      },
+      "sections": {
+        "upcoming-match-section.tsx": null,
+        "latest-news-section.tsx": null
+      }
+    },
+    "server": {
+      "actions": {
+        "contact.ts": null
+      }
+    },
+    "lib": {
+      "mock-data.ts": null,
+      "utils.ts": null
+    },
+    "types": {
+      "index.ts": null
+    },
+    "ai": {
+      "dev.ts": null,
+      "genkit.ts": null
+    },
+    "hooks": {
+      "use-mobile.tsx": null,
+      "use-toast.ts": null
+    },
+    "app": {
+      "favicon.ico": null,
+      "page.tsx": null,
+      "layout.tsx": null,
+      "globals.css": null,
+      "news": {
+        "page.tsx": null
+      },
+      "history": {
+        "page.tsx": null
+      },
+      "roster": {
+        "page.tsx": null
+      },
+      "contact": {
+        "page.tsx": null
+      },
+      "matches": {
+        "page.tsx": null
+      }
+    }
+  },
+  "public": {
+    "Liberdad Escudo.jpg": null,
+    "Libertad.png": null,
+    "Logo.svg": null,
+    "LogoLibertad.png": null,
+    "HeroPrincipal.png": null,
+    "HeroImagen.jpg": null,
+    "rivales": {},
+    "tienda": {
+      "jugador5.jpg": null,
+      "libertadpuerta.jpg": null,
+      "jugador6.jpg": null,
+      "jugador7.jpg": null,
+      "camiseta2.jpg": null,
+      "resultado1.jpg": null,
+      "sticker1.jpg": null,
+      "camiseta3.jpg": null,
+      "fixture.jpg": null,
+      "jugador3.jpg": null,
+      "plantel1.jpg": null,
+      "hinchada.jpg": null,
+      "camiseta4.jpg": null,
+      "jugador1.jpg": null,
+      "jugador2.jpg": null,
+      "jugador4.jpg": null,
+      "formativas1.jpg": null,
+      "preciostienda.jpg": null,
+      "brazalete.jpg": null,
+      "resultado2.jpg": null,
+      "sticker2.jpg": null,
+      "camiseta1.jpg": null
+    }
+  }
+}
