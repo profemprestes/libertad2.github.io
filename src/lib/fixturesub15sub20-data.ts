@@ -2,7 +2,7 @@ import type { Match } from '@/types';
 import { equipos } from './equipos-data';
 
 const CLUB_LIBERTAD_NOMBRE = "Club Atlético Libertad";
-const CLUB_LIBERTAD_ESTADIO = "Estadio Libertad";
+const CLUB_LIBERTAD_ESTADIO = "Parque Battle";
 
 const getOpponentByName = (nombreCorto: string) => {
   const equipo = equipos.find(e => e.nombreCorto === nombreCorto);
