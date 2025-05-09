@@ -9,7 +9,20 @@ public/
 │   ├── web-app-manifest-192x192.png
 │   └── web-app-manifest-512x512.png
 ├── rivales/
-│   └── juanico.png
+│   ├── aguascorrientes.png
+│   ├── calpino.png
+│   ├── cerrillos.png
+│   ├── darling.png
+│   ├── defensoratlanta.png
+│   ├── juanico.png
+│   ├── juventudmelilla.png
+│   ├── libertadwashington.png
+│   ├── liverpoolcs.png
+│   ├── progreso.png
+│   ├── sanfrancisco.png
+│   ├── santalucia.png
+│   ├── villanellyunido.png
+│   └── wanderers.png
 ├── tienda/
 │   ├── brazalete.jpg
 │   ├── camiseta1.jpg
@@ -78,7 +91,9 @@ src/
 │   │   ├── footer.tsx
 │   │   └── header.tsx
 │   ├── sections/
+│   │   ├── HeroNoticias.tsx
 │   │   ├── hero-historia.tsx
+│   │   ├── hero-partidos.tsx
 │   │   ├── hero-principal.tsx
 │   │   ├── historia-resumen.tsx
 │   │   ├── latest-news-section.tsx
@@ -127,6 +142,7 @@ src/
 │   ├── equipos-data.ts
 │   ├── mock-data.ts
 │   ├── noticias-data.ts
+│   ├── partidos-data.ts
 │   └── utils.ts
 ├── server/
 │   └── actions/

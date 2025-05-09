@@ -59,6 +59,8 @@
         "upcoming-match-section.tsx": null,
         "hero-principal.tsx": null,
         "latest-news-section.tsx": null,
+        "hero-partidos.tsx": null,
+        "HeroNoticias.tsx": null,
         "hero-historia.tsx": null,
         "ultimasnoticias.tsx": null,
         "historia-resumen.tsx": null
@@ -71,6 +73,7 @@
     },
     "lib": {
       "mock-data.ts": null,
+      "partidos-data.ts": null,
       "utils.ts": null,
       "noticias-data.ts": null,
       "equipos-data.ts": null
@@ -119,7 +122,20 @@
     "HeroPrincipal.png": null,
     "HeroImagen.jpg": null,
     "rivales": {
-      "juanico.png": null
+      "wanderers.png": null,
+      "cerrillos.png": null,
+      "villanellyunido.png": null,
+      "calpino.png": null,
+      "santalucia.png": null,
+      "darling.png": null,
+      "defensoratlanta.png": null,
+      "aguascorrientes.png": null,
+      "libertadwashington.png": null,
+      "juventudmelilla.png": null,
+      "liverpoolcs.png": null,
+      "juanico.png": null,
+      "sanfrancisco.png": null,
+      "progreso.png": null
     },
     "tienda": {
       "jugador5.jpg": null,
