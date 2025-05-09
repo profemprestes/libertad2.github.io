@@ -1,7 +1,8 @@
 import { SectionTitle } from '@/components/shared/section-title';
 import { ShoppingBag } from 'lucide-react';
 import type { Metadata } from 'next';
-import { HeroTienda } from '@/components/sections/HeroTienda'; // Corrected import name
+import { HeroTienda } from '@/components/sections/HeroTienda'; 
+import { ComoComprar } from '@/components/sections/comocomprar'; // Added import
 
 export const metadata: Metadata = {
   title: 'Tienda Oficial | Club Libertad',
@@ -28,6 +29,7 @@ export default function TiendaPage() {
           ¡Vuelve pronto para encontrar camisetas, bufandas, y mucho más!
         </p>
       </div>
+      <ComoComprar /> {/* Integrated ComoComprar component */}
     </div>
   );
 }
