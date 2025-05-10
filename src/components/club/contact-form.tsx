@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
+import { useState, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,7 +9,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { submitContactForm, type ContactFormState } from '@/server/actions/contact';
 import { useToast } from '@/hooks/use-toast';
 import { Send, Loader2 } from 'lucide-react';
 
@@ -23,62 +21,58 @@ const contactFormSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
-const initialState: ContactFormState = {
-  message: '',
-  status: 'idle',
-};
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending} className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-      {pending ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Enviando...
-        </>
-      ) : (
-        <>
-          Enviar Mensaje <Send className="ml-2 h-4 w-4" />
-        </>
-      )}
-    </Button>
-  );
-}
-
 export function ContactForm() {
-  const [state, formAction] = useActionState(submitContactForm, initialState);
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
-    handleSubmit,
+    handleSubmit: handleFormSubmit, // Renamed to avoid conflict with the new handleSubmit
     formState: { errors },
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
 
-  useEffect(() => {
-    if (state.status === 'success') {
-      toast({
-        title: '¡Mensaje Enviado!',
-        description: state.message,
+  const onSubmit = async (data: ContactFormData, event?: FormEvent<HTMLFormElement>) => {
+    if (event) event.preventDefault();
+    setIsSubmitting(true);
+
+    const myForm = event?.target as HTMLFormElement;
+    const formData = new FormData(myForm);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
       });
-      reset(); // Reset form fields
-    } else if (state.status === 'error' && state.message && !state.errors) {
-      // General error not related to fields
+
+      if (response.ok) {
+        toast({
+          title: '¡Mensaje Enviado!',
+          description: "Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.",
+        });
+        reset();
+      } else {
+        const errorData = await response.text();
+        toast({
+          title: 'Error al Enviar',
+          description: `Hubo un problema al enviar tu mensaje. ${errorData || ''}`,
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
       toast({
-        title: 'Error',
-        description: state.message,
+        title: 'Error de Red',
+        description: "No se pudo conectar con el servidor. Por favor, inténtalo de nuevo más tarde.",
         variant: 'destructive',
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [state, toast, reset]);
+  };
   
-  // Combine server-side field errors with client-side for display
-  const getFieldError = (fieldName: keyof ContactFormData) => 
-    errors[fieldName]?.message || state.errors?.[fieldName]?.[0];
-
   return (
     <Card className="w-full shadow-lg">
       <CardHeader>
@@ -88,33 +82,78 @@ export function ContactForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={formAction} className="space-y-6">
+        {/* The form needs a name for Netlify and data-netlify attribute */}
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          onSubmit={handleFormSubmit(onSubmit)} // Use react-hook-form's handleSubmit
+          className="space-y-6"
+        >
+          {/* Netlify needs this hidden input for JavaScript-rendered forms */}
+          <input type="hidden" name="form-name" value="contact" />
+
           <div>
             <Label htmlFor="name">Nombre Completo</Label>
-            <Input id="name" {...register('name')} placeholder="Juan Pérez" aria-invalid={!!getFieldError('name')} />
-            {getFieldError('name') && <p className="text-sm text-destructive mt-1">{getFieldError('name')}</p>}
+            <Input 
+              id="name" 
+              {...register('name')} 
+              name="name" // Ensure name attribute for Netlify
+              placeholder="Juan Pérez" 
+              aria-invalid={!!errors.name} 
+            />
+            {errors.name && <p className="text-sm text-destructive mt-1">{errors.name.message}</p>}
           </div>
 
           <div>
             <Label htmlFor="email">Dirección de Correo Electrónico</Label>
-            <Input id="email" type="email" {...register('email')} placeholder="juan.perez@ejemplo.com" aria-invalid={!!getFieldError('email')} />
-            {getFieldError('email') && <p className="text-sm text-destructive mt-1">{getFieldError('email')}</p>}
+            <Input 
+              id="email" 
+              type="email" 
+              {...register('email')} 
+              name="email" // Ensure name attribute for Netlify
+              placeholder="juan.perez@ejemplo.com" 
+              aria-invalid={!!errors.email} 
+            />
+            {errors.email && <p className="text-sm text-destructive mt-1">{errors.email.message}</p>}
           </div>
 
           <div>
             <Label htmlFor="subject">Asunto</Label>
-            <Input id="subject" {...register('subject')} placeholder="Consulta sobre entradas" aria-invalid={!!getFieldError('subject')} />
-            {getFieldError('subject') && <p className="text-sm text-destructive mt-1">{getFieldError('subject')}</p>}
+            <Input 
+              id="subject" 
+              {...register('subject')} 
+              name="subject" // Ensure name attribute for Netlify
+              placeholder="Consulta sobre entradas" 
+              aria-invalid={!!errors.subject} 
+            />
+            {errors.subject && <p className="text-sm text-destructive mt-1">{errors.subject.message}</p>}
           </div>
 
           <div>
             <Label htmlFor="message">Mensaje</Label>
-            <Textarea id="message" {...register('message')} placeholder="Tu mensaje aquí..." rows={5} aria-invalid={!!getFieldError('message')} />
-            {getFieldError('message') && <p className="text-sm text-destructive mt-1">{getFieldError('message')}</p>}
+            <Textarea 
+              id="message" 
+              {...register('message')} 
+              name="message" // Ensure name attribute for Netlify
+              placeholder="Tu mensaje aquí..." 
+              rows={5} 
+              aria-invalid={!!errors.message} 
+            />
+            {errors.message && <p className="text-sm text-destructive mt-1">{errors.message.message}</p>}
           </div>
           
-          <SubmitButton />
-          
+          <Button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Enviando...
+              </>
+            ) : (
+              <>
+                Enviar Mensaje <Send className="ml-2 h-4 w-4" />
+              </>
+            )}
+          </Button>
         </form>
       </CardContent>
     </Card>
