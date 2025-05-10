@@ -28,7 +28,7 @@ export default function HomePage() {
       )}
       <LatestNewsSection />
       <EntrarATienda />
-      <Feedinsta />
+      <Bannersociales />
       <HazteSocio />
     </div>
   );
