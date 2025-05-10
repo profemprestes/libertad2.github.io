@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
@@ -28,8 +27,8 @@ interface PromptFormErrors {
   elementDescription?: string;
 }
 
-const LOGIN_USER = 'LibertadAdmin';
-const LOGIN_PASS = 'DecanoCanario';
+const LOGIN_USER = 'Admin'; // Simplified username
+const LOGIN_PASS = '123456789'; // Simplified password
 const SESSION_KEY = 'promptGenSession';
 
 const elementTypes = [
@@ -76,7 +75,7 @@ export default function PromptGeneratorPage() {
 
   useEffect(() => {
     setIsClient(true);
-    if (localStorage.getItem(SESSION_KEY) === 'loggedIn') {
+    if (typeof window !== 'undefined' && localStorage.getItem(SESSION_KEY) === 'loggedIn') {
       setIsAuthenticated(true);
     }
   }, []);
@@ -84,7 +83,9 @@ export default function PromptGeneratorPage() {
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
     if (username === LOGIN_USER && password === LOGIN_PASS) {
-      localStorage.setItem(SESSION_KEY, 'loggedIn');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(SESSION_KEY, 'loggedIn');
+      }
       setIsAuthenticated(true);
       setLoginError('');
       setUsername('');
@@ -95,7 +96,9 @@ export default function PromptGeneratorPage() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem(SESSION_KEY);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(SESSION_KEY);
+    }
     setIsAuthenticated(false);
   };
 
@@ -114,7 +117,7 @@ export default function PromptGeneratorPage() {
     }
   };
 
-  const handleIntegrationFileChange = (filePath: string, isChecked: boolean) => {
+  const handleIntegrationFileChange = (filePath: string, isChecked: boolean | string) => {
     const newSelection = isChecked
       ? [...selectedIntegrationFiles, filePath]
       : selectedIntegrationFiles.filter(file => file !== filePath);
@@ -266,7 +269,6 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
                 <Select
                   value={formData.elementType}
                   onValueChange={handleElementTypeChange}
-                  // name="elementType" // Not needed directly for Select, handled by onValueChange
                 >
                   <SelectTrigger className="mt-1 w-full" aria-invalid={!!formErrors.elementType} id="elementType">
                     <SelectValue placeholder="Selecciona un tipo de elemento" />
@@ -310,7 +312,7 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
                           <Checkbox
                             id={uniqueId}
                             checked={selectedIntegrationFiles.includes(filePath)}
-                            onCheckedChange={(checked) => handleIntegrationFileChange(filePath, !!checked)}
+                            onCheckedChange={(checked) => handleIntegrationFileChange(filePath, checked)}
                           />
                           <Label htmlFor={uniqueId} className="text-sm font-normal text-foreground/80 cursor-pointer">
                             {filePath}

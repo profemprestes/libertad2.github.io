@@ -12,8 +12,8 @@ interface AdminLoginFormProps {
   onLoginSuccess: () => void;
 }
 
-const ADMIN_USERNAME = "AdminLibertad";
-const ADMIN_PASSWORD = "NoticiasAdmin123"; // Store securely in environment variables in a real app
+const ADMIN_USERNAME = "Admin";
+const ADMIN_PASSWORD = "123456789"; // Store securely in environment variables in a real app
 
 export function AdminLoginForm({ onLoginSuccess }: AdminLoginFormProps) {
   const [username, setUsername] = useState('');
