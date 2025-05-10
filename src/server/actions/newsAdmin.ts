@@ -3,10 +3,11 @@
 
 import { z } from "zod";
 import type { NewsArticle } from "@/types";
+import { noticias } from "@/lib/noticias-data"; // Import the noticias array
 
 // Schema for validating incoming form data
 const newsArticleActionSchema = z.object({
-  id: z.string().min(1, "ID es requerido"), // ID is now required
+  id: z.string().min(1, "ID es requerido"),
   title: z.string().min(5, "El título debe tener al menos 5 caracteres."),
   date: z.string().refine(val => !isNaN(Date.parse(val)), "Fecha inválida."),
   summary: z.string().min(10, "El resumen debe tener al menos 10 caracteres.").max(300, "El resumen no debe exceder los 300 caracteres."),
@@ -29,9 +30,9 @@ export async function saveNewsArticleAction(
 ): Promise<SaveNewsArticleState> {
   
   const rawFormData = {
-    id: formData.get("id") as string, // Ensure ID is captured
+    id: formData.get("id") as string,
     title: formData.get("title") as string,
-    date: formData.get("date") as string, // Keep as string for now, convert later if needed
+    date: formData.get("date") as string,
     summary: formData.get("summary") as string,
     imageUrl: formData.get("imageUrl") as string | undefined,
     content: formData.get("content") as string,
@@ -50,33 +51,40 @@ export async function saveNewsArticleAction(
   }
 
   const newArticle: NewsArticle = {
-    id: validatedFields.data.id, // Use validated ID
+    id: validatedFields.data.id,
     title: validatedFields.data.title,
-    date: new Date(validatedFields.data.date).toISOString(), // Convert to ISO string
+    date: new Date(validatedFields.data.date).toISOString(),
     summary: validatedFields.data.summary,
-    imageUrl: validatedFields.data.imageUrl || undefined, // Ensure empty string becomes undefined
+    imageUrl: validatedFields.data.imageUrl || undefined,
     content: validatedFields.data.content,
     category: validatedFields.data.category || undefined,
     author: validatedFields.data.author || undefined,
   };
 
-  // --- SIMULATION: In a real app, this is where you'd save to a DB or write to a file on the server ---
-  console.log("Simulating saving news article to data source:");
-  console.log(newArticle);
-  // For demonstration, we'll just log it.
-  // To actually update `noticias-data.ts` would require server-side file system access,
-  // which is complex and generally not recommended for typical Next.js deployments on platforms like Vercel/Netlify.
-  // A proper backend/CMS/database would be used here.
-  // --- END SIMULATION ---
+  // --- DEVELOPMENT SIMULATION: Update in-memory array ---
+  // IMPORTANT: This modification is only for the current server session
+  // and WILL NOT PERSIST across server restarts or deployments.
+  // A proper database or CMS is required for true data persistence.
+  
+  const existingArticleIndex = noticias.findIndex(article => article.id === newArticle.id);
+  if (existingArticleIndex !== -1) {
+    // Update existing article
+    noticias[existingArticleIndex] = newArticle;
+    console.log(`Simulating update for article ID: ${newArticle.id}`);
+  } else {
+    // Add new article
+    noticias.unshift(newArticle); // Add to the beginning to see it easily
+    console.log(`Simulating addition of new article ID: ${newArticle.id}`);
+  }
+  console.log("Current 'noticias' array (in-memory, development only):", noticias.map(n => ({id: n.id, title: n.title})));
+  // --- END DEVELOPMENT SIMULATION ---
 
-  // Simulate a delay
   await new Promise(resolve => setTimeout(resolve, 1000));
 
-  // For now, let's assume success if validation passes.
-  // In a real scenario, you'd check the result of the save operation.
   return {
-    message: `Noticia "${newArticle.title}" guardada con éxito (simulado).`,
+    message: `Noticia "${newArticle.title}" guardada con éxito (simulado en memoria). Los cambios se perderán al reiniciar el servidor.`,
     status: "success",
     articleId: newArticle.id,
   };
 }
+
