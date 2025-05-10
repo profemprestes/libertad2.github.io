@@ -4,6 +4,7 @@
 import { z } from "zod";
 import type { NewsArticle } from "@/types";
 import { noticias } from "@/lib/noticias-data"; // Import the noticias array
+import { revalidatePath } from "next/cache";
 
 // Schema for validating incoming form data
 const newsArticleActionSchema = z.object({
@@ -60,25 +61,22 @@ export async function saveNewsArticleAction(
     category: validatedFields.data.category || undefined,
     author: validatedFields.data.author || undefined,
   };
-
-  // --- DEVELOPMENT SIMULATION: Update in-memory array ---
-  // IMPORTANT: This modification is only for the current server session
-  // and WILL NOT PERSIST across server restarts or deployments.
-  // A proper database or CMS is required for true data persistence.
   
   const existingArticleIndex = noticias.findIndex(article => article.id === newArticle.id);
+
   if (existingArticleIndex !== -1) {
-    // Update existing article
     noticias[existingArticleIndex] = newArticle;
     console.log(`Simulating update for article ID: ${newArticle.id}`);
+    revalidatePath(`/news/${newArticle.id}`); // Revalidate specific article page
   } else {
-    // Add new article
-    noticias.unshift(newArticle); // Add to the beginning to see it easily
+    noticias.unshift(newArticle); 
     console.log(`Simulating addition of new article ID: ${newArticle.id}`);
   }
-  console.log("Current 'noticias' array (in-memory, development only):", noticias.map(n => ({id: n.id, title: n.title})));
-  // --- END DEVELOPMENT SIMULATION ---
+  revalidatePath('/news'); // Always revalidate the news list page
+  
+  console.log("Current 'noticias' array (in-memory, development only):", noticias.map(n => ({id: n.id, title: n.title.substring(0,20)})));
 
+  // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 1000));
 
   return {
