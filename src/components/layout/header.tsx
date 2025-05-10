@@ -20,7 +20,7 @@ const navItems = [
   { href: '/news', label: 'Noticias', icon: Newspaper },
   { href: '/contact', label: 'Contacto', icon: Mail },
   { href: '/tienda', label: 'Tienda', icon: ShoppingBag },
-  { href: '/prompt-generator', label: 'Prompt Gen', icon: FileText }, // Added for internal use
+  // { href: '/prompt-generator', label: 'Prompt Gen', icon: FileText }, // Removed for internal use
 ];
 
 export function Header() {
