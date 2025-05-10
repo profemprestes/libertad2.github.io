@@ -5,15 +5,17 @@ import type { NewsArticle } from '@/types';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CalendarDays, Tag } from 'lucide-react';
-import { noticias as allNoticias } from '@/lib/noticias-data';
+// Removed: import { noticias as allNoticias } from '@/lib/noticias-data';
 
 interface UltimasNoticiasProps {
+  articles: NewsArticle[]; // Added articles prop
   limit?: number;
   showViewAllLink?: boolean;
 }
 
-export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLink = true }) => {
-  const sortedNoticias = [...allNoticias].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ articles, limit, showViewAllLink = true }) => {
+  // Use the passed articles prop
+  const sortedNoticias = [...articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const noticiasToShow = limit ? sortedNoticias.slice(0, limit) : sortedNoticias;
 
   if (!noticiasToShow || noticiasToShow.length === 0) {
@@ -78,7 +80,7 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
         })}
       </div>
 
-      {showViewAllLink && allNoticias.length > (limit || 0) && allNoticias.length > noticiasToShow.length && (
+      {showViewAllLink && articles.length > (limit || 0) && articles.length > noticiasToShow.length && (
         <div className="text-center mt-12">
           <Button asChild variant="default" size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Link href="/news">

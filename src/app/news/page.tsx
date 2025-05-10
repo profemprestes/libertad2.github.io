@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { HeroNoticias } from '@/components/sections/HeroNoticias';
 import { SectionTitle } from '@/components/shared/section-title';
 import { Newspaper } from 'lucide-react';
-import { JsonLdScript } from '@/lib/json-ld';
+import { JsonLdScript, generateNewsArticleData } from '@/lib/json-ld'; // Imported generateNewsArticleData
 import { noticias } from '@/lib/noticias-data';
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         alt: 'Logo Club Atlético Libertad',
       },
       {
-        url: `https://picsum.photos/seed/newsHero/1200/630`, // A relevant general image for news
+        url: `https://picsum.photos/seed/newsHero/1200/630`, 
         width: 1200,
         height: 630,
         alt: 'Noticias del Club Atlético Libertad',
@@ -49,7 +49,14 @@ export default function NoticiasPage() {
     name: "Noticias del Club - Club Atlético Libertad",
     description: "Todas las últimas noticias y actualizaciones sobre el Club Atlético Libertad.",
     url: `${SITE_URL}/news`,
-    // Potentially add mainEntity with ItemList of news articles if desired for CollectionPage schema
+    mainEntity: { // Added mainEntity with ItemList
+      "@type": "ItemList",
+      itemListElement: noticias.map((article, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: generateNewsArticleData(article) // Use imported function to generate schema for each article
+      }))
+    }
   };
 
   return (
@@ -64,8 +71,9 @@ export default function NoticiasPage() {
           icon={Newspaper}
           className="pt-12"
         />
-        {/* showViewAllLink is false because this page IS the "all news" page */}
-        <UltimasNoticias showViewAllLink={false} /> 
+      
+        {/* Pass noticias data as a prop */}
+        <UltimasNoticias articles={noticias} showViewAllLink={false} /> 
       </div>
     </>
   );
