@@ -30,7 +30,7 @@ const safeToISOString = (dateString?: string): string | undefined => {
 export function generateOrganizationData() {
   const socialLinks = clubContactInfo.socialMedia.map(sm => sm.url).filter(Boolean);
   
-  const organizationData: any = { // Use any or a more specific type if you have one for the schema
+  const organizationData: any = { 
     "@context": "https://schema.org",
     "@type": "SportsTeam",
     name: CLUB_NAME,
@@ -68,7 +68,7 @@ export function generateWebSiteData() {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate": `${SITE_URL}/buscar?q={search_term_string}` 
+        "urlTemplate": `${SITE_URL}/buscar?q={search_term_string}` 
       },
       "query-input": "required name=search_term_string"
     },
@@ -91,7 +91,7 @@ export function generateNewsArticleData(article: NewsArticle) {
 
   const bodyContent = (typeof article.content === 'string' && article.content.trim() !== '') 
     ? article.content.replace(/\\n/g, '\n') 
-    : article.summary; // Fallback to summary
+    : article.summary; 
 
   const publishedDate = safeToISOString(article.date);
 
@@ -187,7 +187,7 @@ export function generateEventData(match: Match) {
     name: `${match.competition}: ${match.homeTeam} vs ${match.awayTeam}`,
     eventStatus: match.status === 'upcoming' ? "https://schema.org/EventScheduled" : 
                  match.status === 'past' ? "https://schema.org/EventCompleted" : 
-                 match.status === 'live' ? "https://schema.org/EventRescheduled" : "https://schema.org/EventScheduled",
+                 match.status === 'live' ? "https://schema.org/EventScheduled" : "https://schema.org/EventScheduled",
     location: {
       "@type": "Place",
       name: match.venue,
@@ -217,7 +217,6 @@ export function generateEventData(match: Match) {
   
   return eventSchema;
 }
-
 
 export function generateLocalBusinessData() {
   const socialLinks = clubContactInfo.socialMedia.map(sm => sm.url).filter(Boolean);
@@ -252,21 +251,19 @@ export function generateLocalBusinessData() {
 export function JsonLdScript<T>({ data }: { data: T | T[] }): JSX.Element | null {
   if (!data || (Array.isArray(data) && data.length === 0)) return null;
   
-  // Create a more stable key, e.g., based on a unique ID if present, or a hash of the stringified data.
-  // For simplicity here, if it's an array, we'll use a fixed key or index-based keys for multiple scripts.
-  // If data is an object with a 'name' or '@id', use that. Otherwise, fallback carefully.
   let keySuffix = 'default';
   if (typeof data === 'object' && data !== null) {
-    if ('@id' in data && typeof (data as any)['@id'] === 'string') {
-      keySuffix = (data as any)['@id'];
-    } else if ('name' in data && typeof (data as any).name === 'string') {
-      keySuffix = (data as any).name;
-    } else if ('headline' in data && typeof (data as any).headline === 'string') { // For NewsArticle
-      keySuffix = (data as any).headline;
+    const idField = (data as any)['@id'] || (data as any).id || (data as any).url;
+    const nameField = (data as any).name || (data as any).headline;
+
+    if (typeof idField === 'string' && idField.length > 0) {
+      keySuffix = idField.substring(idField.lastIndexOf('/') + 1) || idField;
+    } else if (typeof nameField === 'string' && nameField.length > 0) {
+      keySuffix = nameField;
     }
   }
-  const scriptKey = `json-ld-${keySuffix.replace(/[^a-zA-Z0-9-_]/g, '') || Math.random().toString(36).substring(7)}`;
-
+  const sanitizedSuffix = keySuffix.toString().replace(/[^a-zA-Z0-9-_]/g, '') || 'fallback';
+  const scriptKey = `json-ld-${sanitizedSuffix}-${Math.random().toString(36).substring(2, 7)}`;
 
   return (
     <script
