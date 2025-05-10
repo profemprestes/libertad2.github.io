@@ -67,9 +67,30 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
+/**
+ * Represents a player in the Sub-15 category.
+ * @property {string} nombre - The full name of the player.
+ * @property {string} posicion - The player's position on the field (e.g., Arquero, Defensa).
+ * @property {string} instagram - The player's Instagram username (without '@' or full URL).
+ * @property {string} fechaNacimiento - The player's date of birth in "DD/MM/AAAA" format.
+ */
 export interface Sub15Player {
   nombre: string;
-  posicion: string; // Ej: Arquero, Defensa, Volante, Delantero
-  instagram: string; // usuario de Instagram, sin link
-  fechaNacimiento: string; // formato "DD/MM/AAAA"
+  posicion: string; 
+  instagram: string; 
+  fechaNacimiento: string; 
+}
+
+/**
+ * Represents a player in the Sub-20 category.
+ * @property {string} nombre - The full name of the player.
+ * @property {string} posicion - The player's position on the field (e.g., Arquero, Defensa).
+ * @property {string} instagram - The player's Instagram username (without '@' or full URL).
+ * @property {string} fechaNacimiento - The player's date of birth in "DD/MM/AAAA" format.
+ */
+export interface Sub20Player {
+  nombre: string;
+  posicion: string;
+  instagram: string;
+  fechaNacimiento: string;
 }

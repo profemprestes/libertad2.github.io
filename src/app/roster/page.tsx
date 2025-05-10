@@ -1,4 +1,11 @@
-
+/**
+ * @file src/app/roster/page.tsx
+ * @description Page for displaying team rosters, including Primera División, Sub-15, and Sub-20.
+ * - Imports player data for different categories (mockPlayers for Primera, categoriaSub15, categoriaSub20).
+ * - Uses TeamRoster, Sub15TeamRoster, and Sub20TeamRoster components to display player cards.
+ * - Players in Sub15TeamRoster and Sub20TeamRoster are grouped by position 
+ *   (Arquero, Defensa, Volante, Delantero) and then sorted alphabetically by name within each group.
+ */
 import type { Metadata } from 'next';
 import { TeamRoster } from '@/components/club/team-roster';
 import { SectionTitle } from '@/components/shared/section-title';
@@ -6,8 +13,10 @@ import { mockPlayers } from '@/lib/mock-data';
 import { Users } from 'lucide-react';
 import { HeroEquipo } from '@/components/sections/HeroEquipo';
 import { NuestrasCategorias } from '@/components/sections/NuestrasCategorias'; 
-import { categoriaSub15 } from '@/lib/CategoriaSub15.data'; // Import Sub 15 data
-import { Sub15TeamRoster } from '@/components/club/Sub15TeamRoster'; // Import Sub 15 roster component
+import { categoriaSub15 } from '@/lib/CategoriaSub15.data'; 
+import { Sub15TeamRoster } from '@/components/club/Sub15TeamRoster'; 
+import { categoriaSub20 } from '@/lib/CategoriaSub20.data'; // Import Sub 20 data
+import { Sub20TeamRoster } from '@/components/club/Sub20TeamRoster'; // Import Sub 20 roster component
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
@@ -62,6 +71,15 @@ export default function RosterPage() {
       <TeamRoster players={mockPlayers} /> 
       
       <SectionTitle 
+        id="sub20" 
+        title="Plantel Sub-20" 
+        icon={Users}
+        description="Jóvenes promesas de nuestra categoría Sub-20, forjando el futuro del club."
+        className="pt-8"
+      />
+      <Sub20TeamRoster players={categoriaSub20} />
+      
+      <SectionTitle 
         id="sub15" 
         title="Plantel Sub-15" 
         icon={Users}
@@ -70,18 +88,6 @@ export default function RosterPage() {
       />
       <Sub15TeamRoster players={categoriaSub15} />
       
-      {/* 
-      <SectionTitle 
-        id="sub20" 
-        title="Plantel Sub-20" 
-        icon={Users}
-        description="Jóvenes promesas de nuestra categoría Sub-20."
-        className="pt-8"
-      />
-      // <TeamRoster players={mockSub20Players} /> // Assuming you have mockSub20Players 
-      */}
-
     </div>
   );
 }
-
