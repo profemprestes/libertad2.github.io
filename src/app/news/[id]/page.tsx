@@ -1,6 +1,6 @@
 import { noticias } from '@/lib/noticias-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { ArrowLeft, CalendarDays, Tag } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Tag, Home } from 'lucide-react'; // Added Home icon
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -98,7 +98,7 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
       <div className="container mx-auto px-4 py-12">
         <header className="mb-8">
           <Button asChild variant="outline" className="mb-6 group">
-            <Link href="/noticias">
+            <Link href="/news">
               <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Todas las Noticias
             </Link>
           </Button>
@@ -141,10 +141,15 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
                 ))}
               </div>
             </CardContent>
-            <CardFooter className="p-6 pt-2">
+            <CardFooter className="p-6 pt-2 flex justify-between items-center"> {/* Added flex for layout */}
                 <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">
-                    <Link href="/noticias">
+                    <Link href="/news">
                         <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Volver a Noticias
+                    </Link>
+                </Button>
+                <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">
+                    <Link href="/">
+                        <Home className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" /> Volver al Inicio
                     </Link>
                 </Button>
             </CardFooter>
@@ -154,5 +159,3 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
     </>
   );
 }
-
-    

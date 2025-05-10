@@ -5,15 +5,17 @@ import type { NewsArticle } from '@/types';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CalendarDays, Tag } from 'lucide-react';
-import { noticias as allNoticias } from '@/lib/noticias-data';
+// Removed: import { noticias as allNoticias } from '@/lib/noticias-data';
 
 interface UltimasNoticiasProps {
+  articles: NewsArticle[]; // Added articles prop
   limit?: number;
   showViewAllLink?: boolean;
 }
 
-export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLink = true }) => {
-  const sortedNoticias = [...allNoticias].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ articles, limit, showViewAllLink = true }) => {
+  // Use the passed articles prop
+  const sortedNoticias = [...articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const noticiasToShow = limit ? sortedNoticias.slice(0, limit) : sortedNoticias;
 
   if (!noticiasToShow || noticiasToShow.length === 0) {
@@ -29,7 +31,6 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {noticiasToShow.map((noticia) => {
           const newsDate = new Date(noticia.date);
-          // Ensure date formatting is consistent or handled client-side post-hydration if issues arise
           const formattedDate = newsDate.toLocaleDateString('es-ES', {
             year: 'numeric',
             month: 'long',
@@ -45,6 +46,7 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
                     alt={noticia.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     data-ai-hint="news event"
                   />
                 </div>
@@ -68,7 +70,7 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
               </CardContent>
               <CardFooter className="pt-3">
                 <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">
-                  <Link href={`/noticias/${noticia.id}`}>
+                  <Link href={`/news/${noticia.id}`}>
                     Ver Más <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -78,10 +80,10 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
         })}
       </div>
 
-      {showViewAllLink && allNoticias.length > (limit || 0) && allNoticias.length > noticiasToShow.length && (
+      {showViewAllLink && articles.length > (limit || 0) && articles.length > noticiasToShow.length && (
         <div className="text-center mt-12">
           <Button asChild variant="default" size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Link href="/noticias">
+            <Link href="/news">
               Ver Todas las Noticias <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

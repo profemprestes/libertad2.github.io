@@ -2,18 +2,18 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { ClubLogo } from '@/components/club/club-logo';
-import Image from 'next/image'; 
+import Image from 'next/image';
 
 export function HeroHistoria() {
   return (
     <section className="relative py-20 md:py-32 rounded-lg overflow-hidden shadow-xl bg-gradient-to-br from-primary via-red-700 to-accent mb-12">
       <div
         className="absolute inset-0 opacity-20"
-        aria-hidden="true" 
+        aria-hidden="true"
       >
         <Image
-          src="/nuevas/escudo1906.jpg" 
-          alt="Escudo histórico del Club Atlético Libertad de 1906" 
+          src="/nuevas/escudo1906.jpg"
+          alt="Escudo histórico del Club Atlético Libertad de 1906"
           fill
           className="object-cover object-center"
           data-ai-hint="club shield"
@@ -37,7 +37,7 @@ export function HeroHistoria() {
               Línea de Tiempo <ChevronDown className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button asChild size="lg" className="bg-black/70 text-primary-foreground border border-primary-foreground/30 hover:bg-black/80 shadow-lg transition-transform hover:scale-105">
+          <Button asChild variant="outline" size="lg" className="text-primary-foreground border-primary-foreground hover:bg-black/70 hover:text-primary-foreground shadow-lg transition-transform hover:scale-105 bg-black/50">
             <Link href="/">
               Volver al Inicio
             </Link>

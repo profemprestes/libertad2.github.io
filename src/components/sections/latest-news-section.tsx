@@ -1,9 +1,10 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Newspaper } from 'lucide-react';
-import { noticias as allNoticias } from '@/lib/noticias-data'; // Changed import
+import { noticias as allNoticias } from '@/lib/noticias-data'; 
 import { SectionTitle } from '@/components/shared/section-title';
 
 export function LatestNewsSection() {
@@ -18,7 +19,7 @@ export function LatestNewsSection() {
         {latestNews.map((article) => (
           <Card key={article.id} className="flex flex-col md:flex-row overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
             {article.imageUrl && (
-              <div className="md:w-1/3 h-48 md:h-auto relative">
+              <div className="w-full md:w-1/3 aspect-video relative"> {/* Changed to aspect-video and adjusted width classes */}
                 <Image
                   src={article.imageUrl}
                   alt={article.title}
@@ -62,3 +63,4 @@ export function LatestNewsSection() {
     </section>
   );
 }
+

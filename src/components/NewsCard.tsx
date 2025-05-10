@@ -1,0 +1,1 @@
+Verifica que el componente `NewsCard.tsx` (o el componente individual que renderiza cada tarjeta de noticia) funcione correctamente con los datos provenientes de `noticias-data.ts` y que los enlaces a los detalles de la noticia sean correctos.
