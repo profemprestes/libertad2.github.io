@@ -8,7 +8,7 @@ import { partidos as allMatches } from '@/lib/partidos-data';
 import { DecanoStatsSection } from '@/components/sections/DecanoStatsSection';
 import { EntrarATienda } from '@/components/sections/entraratienda';
 import { Feedinsta } from '@/components/sections/Feedinsta';
-
+import { Bannersociales } from '@/components/sections/Bannersociales';
 
 export default function HomePage() {
   const upcomingMatches = allMatches
