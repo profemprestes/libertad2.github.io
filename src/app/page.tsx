@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { LatestNewsSection } from '@/components/sections/latest-news-section';
 import { UpcomingMatchSection } from '@/components/sections/upcoming-match-section';
@@ -6,6 +7,7 @@ import { HistoriaResumen } from '@/components/sections/historia-resumen';
 import { HazteSocio } from '@/components/sections/Haztesocio';
 import { EntrarATienda } from '@/components/sections/entraratienda';
 import { partidos as allMatches } from '@/lib/partidos-data';
+import { DecanoStatsSection } from '@/components/sections/DecanoStatsSection';
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
@@ -53,6 +55,7 @@ export default function HomePage() {
   return (
     <div className="space-y-12 md:space-y-16 lg:space-y-20">
       <HeroPrincipal />
+      <DecanoStatsSection />
       <HistoriaResumen />
       {nextUpcomingMatch && (
         <div className="py-8">
