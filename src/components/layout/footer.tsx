@@ -18,7 +18,7 @@ import {
   ShoppingBag,
   ShoppingCart,
   ChevronRight,
-  ShieldPlus // Icon for Hazte Socio
+  ShieldPlus 
 } from 'lucide-react';
 import type { ElementType } from 'react';
 import { clubContactInfo } from '@/lib/mock-data';
@@ -39,13 +39,13 @@ const mainSiteLinks: NavLinkItem[] = [
   { href: '/roster', label: 'Plantilla', icon: Users },
   { href: '/matches', label: 'Partidos', icon: CalendarDays },
   { href: '/news', label: 'Noticias', icon: Newspaper },
-  { href: '/haztesocio', label: 'Hazte Socio', icon: ShieldPlus }, // Added Hazte Socio link
   { href: '/contact', label: 'Contacto', icon: Mail },
 ];
 
-const shopLinks: NavLinkItem[] = [
+const tiendaYHazteSocioLinks: NavLinkItem[] = [
     { href: '/tienda', label: 'Tienda Oficial', icon: ShoppingBag },
-    { href: '/cart', label: 'Carrito de Compras', icon: ShoppingCart }
+    { href: '/cart', label: 'Carrito de Compras', icon: ShoppingCart },
+    { href: '/haztesocio', label: 'Hazte Socio', icon: ShieldPlus },
 ];
 
 const socialMediaLinks = [
@@ -94,7 +94,7 @@ export function Footer() {
     </li>
   );
   
-  const ShopLinkItem = ({ href, label, icon: Icon }: NavLinkItem) => (
+  const DestacadoLinkItem = ({ href, label, icon: Icon }: NavLinkItem) => (
      <li>
       <Link
         href={href}
@@ -155,10 +155,10 @@ export function Footer() {
           {/* Column 3: Tienda y Carrito (Destacado) */}
           <div className="bg-secondary/70 dark:bg-secondary/40 p-5 rounded-lg shadow-md">
             <h3 className="text-base font-semibold text-foreground uppercase tracking-wider mb-4 flex items-center">
-               <ShoppingBag className="h-5 w-5 mr-1.5 text-primary" /> Tienda y Carrito
+               <ShoppingBag className="h-5 w-5 mr-1.5 text-primary" /> Tienda y Socio
             </h3>
             <ul className="space-y-1.5">
-              {shopLinks.map((link) => <ShopLinkItem key={link.href} {...link} />)}
+              {tiendaYHazteSocioLinks.map((link) => <DestacadoLinkItem key={link.href} {...link} />)}
             </ul>
           </div>
 
