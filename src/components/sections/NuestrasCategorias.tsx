@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -25,7 +24,7 @@ const categorias: CategoriaItem[] = [
     descripcion: 'El equipo principal compitiendo al más alto nivel en la liga local. Garra, pasión y experiencia.',
     imageUrl: 'https://picsum.photos/seed/primeraEquipo/600/400',
     imageHint: 'soccer team action',
-    link: '/roster#primera', // Link to a section or specific roster page if available
+    link: '/roster/primera', 
     icon: Shield,
   },
   {
@@ -34,7 +33,7 @@ const categorias: CategoriaItem[] = [
     descripcion: 'Jóvenes promesas puliendo su talento y preparándose para el salto al primer equipo. Futuro y proyección.',
     imageUrl: 'https://picsum.photos/seed/sub20Equipo/600/400',
     imageHint: 'youth soccer team',
-    link: '/roster#sub20',
+    link: '/roster/sub20',
     icon: Zap,
   },
   {
@@ -43,7 +42,7 @@ const categorias: CategoriaItem[] = [
     descripcion: 'La base de nuestro club. Formando jugadores con los valores y la identidad de Libertad. Semillero de cracks.',
     imageUrl: 'https://picsum.photos/seed/sub15Equipo/600/400',
     imageHint: 'young soccer players',
-    link: '/roster#sub15',
+    link: '/roster/sub15',
     icon: BarChart3,
   },
 ];
@@ -86,7 +85,7 @@ export function NuestrasCategorias() {
               <CardFooter className="p-5 pt-0">
                  <Button asChild variant="default" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group">
                   <Link href={categoria.link}>
-                    Ver Más <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    Ver Plantel <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
               </CardFooter>

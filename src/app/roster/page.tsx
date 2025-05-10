@@ -7,30 +7,32 @@
  *   (Arquero, Defensa, Volante, Delantero) and then sorted alphabetically by name within each group.
  */
 import type { Metadata } from 'next';
-import { TeamRoster } from '@/components/club/team-roster';
-import { SectionTitle } from '@/components/shared/section-title';
-import { mockPlayers } from '@/lib/mock-data';
 import { Users } from 'lucide-react';
 import { HeroEquipo } from '@/components/sections/HeroEquipo';
 import { NuestrasCategorias } from '@/components/sections/NuestrasCategorias'; 
-import { categoriaSub15 } from '@/lib/CategoriaSub15.data'; 
-import { Sub15TeamRoster } from '@/components/club/Sub15TeamRoster'; 
-import { categoriaSub20 } from '@/lib/CategoriaSub20.data'; // Import Sub 20 data
-import { Sub20TeamRoster } from '@/components/club/Sub20TeamRoster'; // Import Sub 20 roster component
+// TeamRoster, Sub15TeamRoster, Sub20TeamRoster and their data will be moved to individual pages.
+// import { TeamRoster } from '@/components/club/team-roster';
+// import { mockPlayers } from '@/lib/mock-data';
+// import { categoriaSub15 } from '@/lib/CategoriaSub15.data'; 
+// import { Sub15TeamRoster } from '@/components/club/Sub15TeamRoster'; 
+// import { categoriaSub20 } from '@/lib/CategoriaSub20.data'; 
+// import { Sub20TeamRoster } from '@/components/club/Sub20TeamRoster';
+// import { SectionTitle } from '@/components/shared/section-title';
+
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
 export const metadata: Metadata = {
-  title: 'Plantilla del Equipo - Club Atlético Libertad',
-  description: 'Conoce a los jugadores y el cuerpo técnico que forman parte del Club Atlético Libertad. Perfiles, números y más información sobre nuestro equipo y categorías.',
-  keywords: ['plantilla club libertad', 'jugadores club libertad', 'equipo libertad canelones', 'cuerpo técnico libertad', 'fútbol Canelones plantilla', 'sub 15 libertad', 'sub 20 libertad', 'primera división libertad'],
+  title: 'Planteles del Club - Club Atlético Libertad',
+  description: 'Explora los planteles de las diferentes categorías del Club Atlético Libertad: Primera División, Sub-20 y Sub-15. Conoce a nuestros jugadores y cuerpo técnico.',
+  keywords: ['planteles club libertad', 'jugadores club libertad', 'equipo libertad canelones', 'cuerpo técnico libertad', 'fútbol Canelones plantilla', 'sub 15 libertad', 'sub 20 libertad', 'primera división libertad'],
   authors: [{ name: 'Club Atlético Libertad', url: SITE_URL }],
   alternates: {
     canonical: '/roster',
   },
   openGraph: {
-    title: 'Plantilla del Equipo - Club Atlético Libertad',
-    description: 'Conoce a los jugadores y el cuerpo técnico del Club Atlético Libertad.',
+    title: 'Planteles del Club - Club Atlético Libertad',
+    description: 'Explora los planteles de las diferentes categorías del Club Atlético Libertad.',
     url: `${SITE_URL}/roster`,
     images: [
       {
@@ -48,8 +50,8 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: 'Plantilla del Equipo - Club Atlético Libertad',
-    description: 'Conoce a los jugadores y el cuerpo técnico del Club Atlético Libertad.',
+    title: 'Planteles del Club - Club Atlético Libertad',
+    description: 'Explora los planteles de las diferentes categorías del Club Atlético Libertad.',
     images: [`${SITE_URL}/tienda/plantel1.jpg`], 
   },
 };
@@ -59,8 +61,15 @@ export default function RosterPage() {
     <div className="space-y-12 md:space-y-16 lg:space-y-20">
       <HeroEquipo />
       
+      {/* NuestrasCategorias will link to the new individual roster pages */}
       <NuestrasCategorias /> 
+      
+      {/* 
+        The SectionTitles and Roster components below will be moved to their respective new pages.
+        This page (src/app/roster/page.tsx) will now serve as an overview/landing page for the different categories.
+      */}
 
+      {/* 
       <SectionTitle 
         id="primera" 
         title="Plantel Principal" 
@@ -86,7 +95,8 @@ export default function RosterPage() {
         description="El futuro del club en nuestra categoría Sub-15. Jóvenes promesas del Decano."
         className="pt-8"
       />
-      <Sub15TeamRoster players={categoriaSub15} />
+      <Sub15TeamRoster players={categoriaSub15} /> 
+      */}
       
     </div>
   );

@@ -9,18 +9,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/',
     '/history',
     '/roster',
+    '/roster/primera', // Added
+    '/roster/sub20',   // Added
+    '/roster/sub15',   // Added
     '/matches',
     '/news',
     '/contact',
     '/tienda',
     '/cart',
     '/haztesocio',
-    '/prompt-generator', // Added new page
+    '/prompt-generator',
   ].map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date().toISOString(),
     changeFrequency: route === '/' ? 'daily' : 'weekly' as MetadataRoute.Sitemap[0]['changeFrequency'],
-    priority: route === '/' ? 1 : (route === '/prompt-generator' ? 0.5 : 0.8), // Adjusted priority
+    priority: route === '/' ? 1 : (route.startsWith('/roster') || route === '/prompt-generator' ? 0.7 : 0.8), 
   }));
 
   const newsArticleRoutes: MetadataRoute.Sitemap = noticias.map((article) => ({
