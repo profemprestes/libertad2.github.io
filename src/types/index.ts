@@ -94,3 +94,17 @@ export interface Sub20Player {
   instagram: string;
   fechaNacimiento: string;
 }
+
+/**
+ * Represents a player in the Primera (First Team) category.
+ * @property {string} nombre - The full name of the player.
+ * @property {string} posicion - The player's position on the field (e.g., Arquero, Defensa).
+ * @property {string} instagram - The player's Instagram username (without '@' or full URL).
+ * @property {string} fechaNacimiento - The player's date of birth in "DD/MM/AAAA" format.
+ */
+export interface PrimeraPlayer {
+  nombre: string;
+  posicion: string;
+  instagram: string;
+  fechaNacimiento: string;
+}

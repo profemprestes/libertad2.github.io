@@ -1,9 +1,9 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { TeamRoster } from '@/components/club/team-roster';
+import { PrimeraTeamRoster } from '@/components/club/PrimeraTeamRoster';
 import { SectionTitle } from '@/components/shared/section-title';
-import { mockPlayers } from '@/lib/mock-data';
+import { categoriaPrimera } from '@/lib/CategoriaPrimera.data';
 import { Users, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -48,7 +48,7 @@ export default function PrimeraRosterPage() {
         icon={Users}
         description="Detalle de jugadores y cuerpo técnico del primer equipo del Decano del Fútbol Canario."
       />
-      <TeamRoster players={mockPlayers} />
+      <PrimeraTeamRoster players={categoriaPrimera} />
     </div>
   );
 }
