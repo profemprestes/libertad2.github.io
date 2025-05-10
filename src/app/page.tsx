@@ -7,6 +7,7 @@ import { HazteSocio } from '@/components/sections/Haztesocio';
 import { partidos as allMatches } from '@/lib/partidos-data';
 import { DecanoStatsSection } from '@/components/sections/DecanoStatsSection';
 import { EntrarATienda } from '@/components/sections/entraratienda';
+import { Feedinsta } from '@/components/sections/Feedinsta';
 
 
 export default function HomePage() {
@@ -27,6 +28,7 @@ export default function HomePage() {
       )}
       <LatestNewsSection />
       <EntrarATienda />
+      <Feedinsta />
       <HazteSocio />
     </div>
   );
