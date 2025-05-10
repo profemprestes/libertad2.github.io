@@ -15,7 +15,7 @@ export function HeroHazteSocio() {
           src="/nuevas/carnet-socio.jpg" // Placeholder image for membership
           alt="Carnet de Socio del Club Atlético Libertad" 
           fill
-          className="object-cover bg-center"
+          className="object-cover object-center"
           data-ai-hint="membership card people"
           priority
         />
@@ -48,4 +48,3 @@ export function HeroHazteSocio() {
     </section>
   );
 }
-

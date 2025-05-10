@@ -15,7 +15,7 @@ export function HeroHistoria() {
           src="/nuevas/escudo1906.jpg" 
           alt="Escudo histórico del Club Atlético Libertad de 1906" 
           fill
-          className="object-cover bg-center"
+          className="object-cover object-center"
           data-ai-hint="club shield"
         />
       </div>
@@ -37,7 +37,7 @@ export function HeroHistoria() {
               Línea de Tiempo <ChevronDown className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="text-primary-foreground border-primary-foreground bg-black/70 hover:bg-black/80 shadow-lg transition-transform hover:scale-105">
+          <Button asChild size="lg" className="bg-black/70 text-primary-foreground border border-primary-foreground/30 hover:bg-black/80 shadow-lg transition-transform hover:scale-105">
             <Link href="/">
               Volver al Inicio
             </Link>
@@ -47,4 +47,3 @@ export function HeroHistoria() {
     </section>
   );
 }
-

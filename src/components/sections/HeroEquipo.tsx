@@ -15,7 +15,7 @@ export function HeroEquipo() {
           src="/tienda/plantel1.jpg" // Assuming a relevant image for the team
           alt="Plantel del Club Atlético Libertad"
           fill
-          className="object-cover bg-center"
+          className="object-cover object-center"
           data-ai-hint="team photo"
         />
       </div>

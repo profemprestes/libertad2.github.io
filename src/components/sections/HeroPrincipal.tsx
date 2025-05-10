@@ -15,7 +15,7 @@ export function HeroPrincipal() {
           src="/tienda/hinchada.jpg"
           alt="Hinchada del Club Atlético Libertad alentando en el estadio"
           fill
-          className="object-cover bg-center"
+          className="object-cover object-center"
           data-ai-hint="stadium crowd"
           priority 
         />
@@ -34,7 +34,7 @@ export function HeroPrincipal() {
               Ver Partidos <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="text-primary-foreground border-primary-foreground bg-black/70 hover:bg-black/80 shadow-lg transition-transform hover:scale-105">
+          <Button asChild size="lg" className="bg-black/70 text-primary-foreground border border-primary-foreground/30 hover:bg-black/80 shadow-lg transition-transform hover:scale-105">
             <Link href="/roster">
               Conoce al Equipo <Users className="ml-2 h-5 w-5" />
             </Link>
@@ -44,4 +44,3 @@ export function HeroPrincipal() {
     </section>
   );
 }
-
