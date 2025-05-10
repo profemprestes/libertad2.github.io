@@ -29,7 +29,6 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {noticiasToShow.map((noticia) => {
           const newsDate = new Date(noticia.date);
-          // Ensure date formatting is consistent or handled client-side post-hydration if issues arise
           const formattedDate = newsDate.toLocaleDateString('es-ES', {
             year: 'numeric',
             month: 'long',

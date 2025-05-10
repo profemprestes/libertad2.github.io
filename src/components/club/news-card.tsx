@@ -16,7 +16,7 @@ const getCategoryInSpanish = (category: NewsArticle['category']): string => {
     case 'Match Report': return 'Crónica del Partido';
     case 'Transfer': return 'Fichaje';
     case 'Community': return 'Comunidad';
-    default: return category;
+    default: return category || 'General'; // Provide a fallback for undefined category
   }
 };
 
@@ -26,7 +26,7 @@ export function NewsCard({ article }: NewsCardProps) {
   return (
     <Card id={article.id} className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
       {article.imageUrl && (
-        <div className="relative h-56 w-full">
+        <div className="relative w-full aspect-video"> {/* Changed h-56 to aspect-video */}
           <Image
             src={article.imageUrl}
             alt={article.title}

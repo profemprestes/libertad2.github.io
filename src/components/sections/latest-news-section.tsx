@@ -19,7 +19,7 @@ export function LatestNewsSection() {
         {latestNews.map((article) => (
           <Card key={article.id} className="flex flex-col md:flex-row overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
             {article.imageUrl && (
-              <div className="md:w-1/3 h-48 md:h-auto relative">
+              <div className="w-full md:w-1/3 aspect-video relative"> {/* Changed to aspect-video and adjusted width classes */}
                 <Image
                   src={article.imageUrl}
                   alt={article.title}
