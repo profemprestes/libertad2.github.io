@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { CartProvider } from '@/contexts/cart-context';
+import { JsonLdScript, generateOrganizationData, generateWebSiteData } from '@/lib/json-ld';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -89,6 +90,9 @@ export const metadata: Metadata = {
   }
 };
 
+const organizationSchema = generateOrganizationData();
+const websiteSchema = generateWebSiteData();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -96,6 +100,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning className="h-full">
+      <head>
+        <JsonLdScript data={organizationSchema} />
+        <JsonLdScript data={websiteSchema} />
+      </head>
       <body 
         className={cn(
           geistSans.variable, 
@@ -115,3 +123,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+    

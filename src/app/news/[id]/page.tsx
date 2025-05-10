@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { JsonLdScript, generateNewsArticleData } from '@/lib/json-ld';
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
@@ -57,7 +58,7 @@ export async function generateMetadata({ params }: NewsDetailPageProps): Promise
         {
           url: imageUrl,
           alt: noticia.title,
-          width: noticia.imageUrl ? 1200 : 512, // Provide example dimensions
+          width: noticia.imageUrl ? 1200 : 512, 
           height: noticia.imageUrl ? 630 : 512,
         },
       ],
@@ -89,62 +90,69 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
     minute: '2-digit',
   });
 
-  return (
-    <div className="container mx-auto px-4 py-12">
-      <header className="mb-8">
-         <Button asChild variant="outline" className="mb-6 group">
-          <Link href="/noticias">
-            <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Todas las Noticias
-          </Link>
-        </Button>
-      </header>
+  const newsArticleSchema = generateNewsArticleData(noticia);
 
-      <article> {/* Changed Card to article for semantic HTML */}
-        <Card className="shadow-xl overflow-hidden">
-          {noticia.imageUrl && (
-              <div className="relative aspect-[16/9] w-full">
-                <Image
-                  src={noticia.imageUrl}
-                  alt={noticia.title} 
-                  fill
-                  className="object-cover"
-                  data-ai-hint="news main image"
-                  priority 
-                />
-              </div>
-            )}
-          <CardHeader className="p-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-primary"> {/* Changed CardTitle to h1 */}
-              {noticia.title}
-            </h1>
-            <div className="flex items-center text-sm text-muted-foreground space-x-2 pt-2">
-              <CalendarDays className="h-4 w-4" />
-              <time dateTime={noticia.date}>{formattedDate}</time> {/* Added time element */}
-              {noticia.category && (
-                <>
-                  <span className="mx-1">•</span>
-                  <Tag className="h-4 w-4" />
-                  <span>{noticia.category}</span>
-                </>
+  return (
+    <>
+      <JsonLdScript data={newsArticleSchema} />
+      <div className="container mx-auto px-4 py-12">
+        <header className="mb-8">
+          <Button asChild variant="outline" className="mb-6 group">
+            <Link href="/noticias">
+              <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Todas las Noticias
+            </Link>
+          </Button>
+        </header>
+
+        <article>
+          <Card className="shadow-xl overflow-hidden">
+            {noticia.imageUrl && (
+                <div className="relative aspect-[16/9] w-full">
+                  <Image
+                    src={noticia.imageUrl}
+                    alt={noticia.title} 
+                    fill
+                    className="object-cover"
+                    data-ai-hint="news main image"
+                    priority 
+                  />
+                </div>
               )}
-            </div>
-          </CardHeader>
-          <CardContent className="p-6 pt-0">
-            <div className="prose prose-lg max-w-none text-foreground space-y-4 dark:prose-invert">
-              {noticia.content.split('\n').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-          </CardContent>
-          <CardFooter className="p-6 pt-2">
-              <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">
-                  <Link href="/noticias">
-                      <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Volver a Noticias
-                  </Link>
-              </Button>
-          </CardFooter>
-        </Card>
-      </article>
-    </div>
+            <CardHeader className="p-6">
+              <h1 className="text-3xl md:text-4xl font-bold text-primary">
+                {noticia.title}
+              </h1>
+              <div className="flex items-center text-sm text-muted-foreground space-x-2 pt-2">
+                <CalendarDays className="h-4 w-4" />
+                <time dateTime={noticia.date}>{formattedDate}</time>
+                {noticia.category && (
+                  <>
+                    <span className="mx-1">•</span>
+                    <Tag className="h-4 w-4" />
+                    <span>{noticia.category}</span>
+                  </>
+                )}
+              </div>
+            </CardHeader>
+            <CardContent className="p-6 pt-0">
+              <div className="prose prose-lg max-w-none text-foreground space-y-4 dark:prose-invert">
+                {noticia.content.split('\n').map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            </CardContent>
+            <CardFooter className="p-6 pt-2">
+                <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">
+                    <Link href="/noticias">
+                        <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Volver a Noticias
+                    </Link>
+                </Button>
+            </CardFooter>
+          </Card>
+        </article>
+      </div>
+    </>
   );
 }
+
+    

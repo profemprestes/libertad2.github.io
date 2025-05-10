@@ -4,6 +4,7 @@ import { SectionTitle } from '@/components/shared/section-title';
 import { partidos } from '@/lib/partidos-data';
 import { CalendarDays } from 'lucide-react';
 import { HeroPartidos } from '@/components/sections/hero-partidos';
+import { JsonLdScript, generateEventData } from '@/lib/json-ld';
 
 const SITE_URL = 'https://pruebaslibertad.netlify.app';
 
@@ -26,13 +27,6 @@ export const metadata: Metadata = {
         height: 512,
         alt: 'Logo Club Atlético Libertad',
       },
-      // Podrías añadir una imagen genérica de un estadio o calendario
-      // {
-      //   url: `${SITE_URL}/public/estadio_partido.jpg`,
-      //   width: 1200,
-      //   height: 630,
-      //   alt: 'Estadio para un partido de fútbol',
-      // },
     ],
   },
   twitter: {
@@ -43,17 +37,44 @@ export const metadata: Metadata = {
 };
 
 export default function MatchesPage() {
+  const upcomingMatches = partidos.filter(match => match.status === 'upcoming' || match.status === 'live');
+  const pastMatches = partidos.filter(match => match.status === 'past');
+
+  const eventsSchema = [...upcomingMatches, ...pastMatches].map(match => generateEventData(match));
+
+  const matchesPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Partidos y Resultados - Club Atlético Libertad",
+    description: "Calendario de partidos, resultados y próximos encuentros del Club Atlético Libertad.",
+    url: `${SITE_URL}/matches`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: eventsSchema.map((event, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: event 
+      }))
+    }
+  };
+
+
   return (
-    <div>
-      <HeroPartidos />
-      <SectionTitle 
-        id="proximos-resultados" 
-        title="Calendario y Marcadores" 
-        icon={CalendarDays}
-        description="Explora el calendario de los próximos partidos y consulta los resultados de los encuentros anteriores del Club Atlético Libertad."
-        className="pt-12" 
-      />
-      <MatchSchedule matches={partidos} />
-    </div>
+    <>
+      <JsonLdScript data={matchesPageSchema} />
+      <div>
+        <HeroPartidos />
+        <SectionTitle 
+          id="proximos-resultados" 
+          title="Calendario y Marcadores" 
+          icon={CalendarDays}
+          description="Explora el calendario de los próximos partidos y consulta los resultados de los encuentros anteriores del Club Atlético Libertad."
+          className="pt-12" 
+        />
+        <MatchSchedule matches={partidos} />
+      </div>
+    </>
   );
 }
+
+    
