@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Newspaper } from 'lucide-react';
-import { noticias as allNoticias } from '../../lib/noticias-data'; // Changed to relative path
+import { noticias as allNoticias } from '@/lib/noticias-data'; 
 import { SectionTitle } from '@/components/shared/section-title';
 
 export function LatestNewsSection() {
