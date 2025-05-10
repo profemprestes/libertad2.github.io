@@ -63,3 +63,4 @@ export function LatestNewsSection() {
     </section>
   );
 }
+
