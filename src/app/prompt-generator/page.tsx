@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
@@ -16,19 +17,18 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 interface PromptFormData {
   elementType: string;
   elementName: string;
-  integrationTarget: string; // Kept as string, will be comma-separated
+  integrationTarget: string; 
   elementDescription: string;
 }
 
 interface PromptFormErrors {
   elementType?: string;
   elementName?: string;
-  // integrationTarget is optional
   elementDescription?: string;
 }
 
-const LOGIN_USER = 'Admin'; // Simplified username
-const LOGIN_PASS = '123456789'; // Simplified password
+const LOGIN_USER = 'Admin'; 
+const LOGIN_PASS = '123456789'; 
 const SESSION_KEY = 'promptGenSession';
 
 const elementTypes = [
@@ -51,7 +51,6 @@ const commonIntegrationTargets = [
   'src/app/haztesocio/page.tsx',
   'src/components/layout/header.tsx',
   'src/components/layout/footer.tsx',
-  // Add other relevant files as needed
 ];
 
 
@@ -75,10 +74,16 @@ export default function PromptGeneratorPage() {
 
   useEffect(() => {
     setIsClient(true);
-    if (typeof window !== 'undefined' && localStorage.getItem(SESSION_KEY) === 'loggedIn') {
-      setIsAuthenticated(true);
-    }
   }, []);
+
+  useEffect(() => {
+    if (isClient && typeof window !== 'undefined') {
+      if (localStorage.getItem(SESSION_KEY) === 'loggedIn') {
+        setIsAuthenticated(true);
+      }
+    }
+  }, [isClient]);
+
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
@@ -381,4 +386,3 @@ Recuerda priorizar la modularidad, la reutilización de código y la consistenci
     </div>
   );
 }
-
