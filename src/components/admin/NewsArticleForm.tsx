@@ -13,10 +13,10 @@ import { useToast } from '@/hooks/use-toast';
 import { PlusCircle, Loader2, Send } from 'lucide-react';
 import type { NewsArticle } from '@/types';
 import { saveNewsArticleAction, type SaveNewsArticleState } from '@/server/actions/newsAdmin';
-import { useActionState, useEffect, useState } from 'react';
+import { useActionState, useEffect, useTransition } from 'react'; // Added useTransition
 
 const newsArticleSchema = z.object({
-  id: z.string().optional(), // Optional for new articles
+  id: z.string().optional(), 
   title: z.string().min(5, { message: "El título debe tener al menos 5 caracteres." }),
   date: z.string().refine(val => !isNaN(Date.parse(val)), { message: "Fecha inválida." }),
   summary: z.string().min(10, { message: "El resumen debe tener al menos 10 caracteres." }).max(300, "El resumen no debe exceder los 300 caracteres."),
@@ -34,39 +34,35 @@ const initialState: SaveNewsArticleState = {
 };
 
 export function NewsArticleForm() {
-  const [state, formAction] = useActionState(saveNewsArticleAction, initialState);
+  const [serverState, formAction] = useActionState(saveNewsArticleAction, initialState);
+  const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue, // To set date value
+    setValue,
   } = useForm<NewsArticleFormData>({
     resolver: zodResolver(newsArticleSchema),
     defaultValues: {
-        date: new Date().toISOString().split('T')[0], // Default to today's date
+        date: new Date().toISOString().split('T')[0], 
         imageUrl: '',
         category: '',
-        author: 'Departamento de Prensa C.A.L.', // Default author
+        author: 'Departamento de Prensa C.A.L.',
     }
   });
   
   useEffect(() => {
-    // Set default date on component mount
      setValue('date', new Date().toISOString().split('T')[0]);
   }, [setValue]);
 
-
   useEffect(() => {
-    setIsSubmitting(false); // Reset submitting state when action completes
-    if (state.status === 'success') {
+    if (serverState.status === 'success') {
       toast({
         title: '¡Noticia Guardada!',
-        description: state.message,
+        description: serverState.message,
       });
       reset({ 
         date: new Date().toISOString().split('T')[0], 
@@ -77,32 +73,31 @@ export function NewsArticleForm() {
         content: '', 
         category: '' 
       });
-    } else if (state.status === 'error') {
+    } else if (serverState.status === 'error') {
       toast({
         title: 'Error al Guardar',
-        description: state.message,
+        description: serverState.message,
         variant: 'destructive',
       });
     }
-  }, [state, toast, reset]);
+  }, [serverState, toast, reset]);
 
-  const processForm = async (data: NewsArticleFormData) => {
-    setIsSubmitting(true);
-    const formData = new FormData();
+  const processForm = (data: NewsArticleFormData) => {
+    const formDataToSubmit = new FormData();
     Object.entries(data).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-            formData.append(key, String(value));
+            formDataToSubmit.append(key, String(value));
         }
     });
     
-    // Add a unique ID for new articles if not present
-    if (!formData.has('id') || !formData.get('id')) {
-        formData.set('id', `noticia-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`);
+    if (!formDataToSubmit.has('id') || !formDataToSubmit.get('id')) {
+        formDataToSubmit.set('id', `noticia-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`);
     }
     
-    formAction(formData);
+    startTransition(() => {
+        formAction(formDataToSubmit);
+    });
   };
-
 
   return (
     <Card className="w-full shadow-lg">
@@ -158,8 +153,8 @@ export function NewsArticleForm() {
             {errors.author && <p className="text-sm text-destructive mt-1">{errors.author.message}</p>}
           </div>
           
-          <Button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-            {isSubmitting ? (
+          <Button type="submit" disabled={isPending} className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+            {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Guardando...
               </>
