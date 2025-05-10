@@ -45,6 +45,7 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
                     alt={noticia.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     data-ai-hint="news event"
                   />
                 </div>
