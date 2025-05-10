@@ -69,7 +69,7 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
               </CardContent>
               <CardFooter className="pt-3">
                 <Button asChild variant="link" className="text-primary p-0 hover:text-accent group">
-                  <Link href={`/noticias/${noticia.id}`}>
+                  <Link href={`/news/${noticia.id}`}>
                     Ver Más <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -82,7 +82,7 @@ export const UltimasNoticias: FC<UltimasNoticiasProps> = ({ limit, showViewAllLi
       {showViewAllLink && allNoticias.length > (limit || 0) && allNoticias.length > noticiasToShow.length && (
         <div className="text-center mt-12">
           <Button asChild variant="default" size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Link href="/noticias">
+            <Link href="/news">
               Ver Todas las Noticias <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
