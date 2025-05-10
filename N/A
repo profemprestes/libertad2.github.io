@@ -1,0 +1,1 @@
+Dado que `noticias-data.ts` se modifica en memoria en el lado del servidor por el panel de administración (simulación), los cambios en las noticias se reflejarán en el cliente después de una nueva solicitud al servidor o una recarga de la página, y se perderán si el servidor se reinicia. Este comportamiento es esperado para esta simulación sin base de datos.
